@@ -4,142 +4,146 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thư Ký · Luan</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
 :root{
-  --bg:#f5f0e8; --ink:#1a1814; --paper:#fdfaf4; --border:#ddd8cc;
-  --orange:#ec872b; --green:#2d7d5f; --red:#c0392b; --blue:#2c5f8a;
-  --muted:#8a8478; --surface:#eee9df; --warm:#f0e8d8;
-  --font:'DM Sans',sans-serif; --serif:'Instrument Serif',serif; --mono:'DM Mono',monospace;
+  --bg:#f5f0e8;--ink:#1a1814;--paper:#fdfaf4;--border:#ddd8cc;
+  --orange:#ec872b;--green:#2d7d5f;--red:#c0392b;--blue:#2c5f8a;
+  --muted:#8a8478;--surface:#eee9df;--warm:#f0e8d8;
+  --font:'DM Sans',sans-serif;--serif:'Instrument Serif',serif;--mono:'DM Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column;}
 
-/* ── TOP BAR ── */
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--paper);border-bottom:1px solid var(--border);}
-.logo{font-family:var(--serif);font-size:20px;letter-spacing:0.01em;display:flex;align-items:center;gap:8px;}
+/* TOP BAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:var(--paper);border-bottom:1px solid var(--border);flex-wrap:wrap;gap:8px;}
+.logo{font-family:var(--serif);font-size:20px;display:flex;align-items:center;gap:8px;}
 .logo-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);}
-.topbar-right{display:flex;align-items:center;gap:12px;}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .date-chip{font-family:var(--mono);font-size:11px;color:var(--muted);background:var(--surface);padding:4px 10px;border-radius:20px;}
 .api-wrap{display:flex;align-items:center;gap:6px;}
 .api-label{font-size:11px;color:var(--muted);}
-.api-input{background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--ink);font-family:var(--mono);font-size:11px;padding:5px 8px;width:180px;outline:none;}
+.api-input{background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--ink);font-family:var(--mono);font-size:11px;padding:5px 8px;width:160px;outline:none;}
 .api-input:focus{border-color:var(--orange);}
-.api-ok{font-size:11px;color:var(--green);font-family:var(--mono);}
+.drive-btn{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:6px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:12px;font-family:var(--font);transition:all .2s;}
+.drive-btn:hover{border-color:var(--orange);}
+.drive-btn.connected{border-color:var(--green);color:var(--green);}
+.drive-dot{width:7px;height:7px;border-radius:50%;background:var(--muted);}
+.drive-dot.on{background:var(--green);}
+.sync-status{font-size:11px;font-family:var(--mono);color:var(--muted);}
 
-/* ── MODE TABS ── */
-.modes{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--paper);}
-.mode-btn{padding:10px 20px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.05em;text-transform:uppercase;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--font);}
+/* MODES */
+.modes{display:flex;border-bottom:1px solid var(--border);background:var(--paper);}
+.mode-btn{padding:10px 18px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.05em;text-transform:uppercase;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--font);}
 .mode-btn.active{color:var(--orange);border-bottom-color:var(--orange);}
 .mode-btn:hover:not(.active){color:var(--ink);}
 
-/* ── MAIN LAYOUT ── */
-.layout{display:flex;flex:1;overflow:hidden;height:calc(100vh - 99px);}
+/* LAYOUT */
+.layout{display:flex;flex:1;overflow:hidden;height:calc(100vh - 97px);}
 
-/* ── LEFT: CHAT ── */
-.chat-panel{width:360px;min-width:360px;display:flex;flex-direction:column;border-right:1px solid var(--border);background:var(--paper);}
-.chat-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+/* CHAT PANEL */
+.chat-panel{width:340px;min-width:340px;display:flex;flex-direction:column;border-right:1px solid var(--border);background:var(--paper);}
+.chat-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .chat-title{font-size:13px;font-weight:600;}
-.mode-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-family:var(--mono);background:var(--surface);}
+.mode-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-family:var(--mono);background:var(--surface);color:var(--muted);}
 .chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
-.msg{padding:10px 13px;border-radius:12px;font-size:13px;line-height:1.6;white-space:pre-wrap;}
-.msg.ai{background:var(--warm);border:1px solid var(--border);align-self:flex-start;max-width:92%;border-bottom-left-radius:3px;}
-.msg.user{background:var(--orange);color:#fff;align-self:flex-end;max-width:85%;border-bottom-right-radius:3px;}
-.msg.system{background:var(--surface);color:var(--muted);font-size:12px;align-self:center;text-align:center;border-radius:8px;padding:6px 12px;}
-.chat-input-wrap{padding:12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:8px;}
-.quick-btns{display:flex;gap:6px;flex-wrap:wrap;}
-.qbtn{font-size:11px;padding:4px 10px;border-radius:16px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s;font-family:var(--font);}
+.msg{padding:10px 13px;border-radius:12px;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word;}
+.msg.ai{background:var(--warm);border:1px solid var(--border);align-self:flex-start;max-width:95%;border-bottom-left-radius:3px;}
+.msg.user{background:var(--orange);color:#fff;align-self:flex-end;max-width:88%;border-bottom-right-radius:3px;}
+.msg.sys{background:var(--surface);color:var(--muted);font-size:11px;align-self:center;text-align:center;border-radius:8px;padding:5px 12px;font-family:var(--mono);}
+.chat-input-wrap{padding:10px 12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:7px;}
+.quick-btns{display:flex;gap:5px;flex-wrap:wrap;}
+.qbtn{font-size:11px;padding:4px 9px;border-radius:14px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s;font-family:var(--font);}
 .qbtn:hover{border-color:var(--orange);color:var(--orange);}
 .chat-row{display:flex;gap:6px;}
-.chat-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--ink);font-family:var(--font);font-size:13px;padding:9px 12px;outline:none;resize:none;min-height:38px;max-height:100px;}
+.chat-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--ink);font-family:var(--font);font-size:13px;padding:8px 11px;outline:none;resize:none;min-height:36px;max-height:90px;}
 .chat-input:focus{border-color:var(--orange);}
-.send-btn{background:var(--orange);border:none;border-radius:8px;color:#fff;width:38px;cursor:pointer;font-size:18px;transition:opacity .2s;flex-shrink:0;}
+.send-btn{background:var(--orange);border:none;border-radius:8px;color:#fff;width:36px;cursor:pointer;font-size:17px;transition:opacity .2s;flex-shrink:0;}
 .send-btn:hover{opacity:.85;}
 
-/* ── RIGHT: BOARD / VIEWS ── */
+/* RIGHT PANEL */
 .right-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 
-/* Daily board */
-.board-wrap{flex:1;overflow-x:auto;overflow-y:hidden;display:flex;}
-.col{min-width:200px;max-width:200px;display:flex;flex-direction:column;border-right:1px solid var(--border);}
-.col-head{padding:12px 14px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--border);background:var(--paper);}
-.col-stripe{width:3px;height:14px;border-radius:2px;flex-shrink:0;}
-.col-tasks{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:7px;}
-.card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.5;position:relative;transition:border-color .15s,transform .15s,opacity .2s;}
-.card:hover{border-color:var(--orange);transform:translateY(-1px);}
-.card.done{opacity:.4;}
-.card.done .card-text{text-decoration:line-through;}
-.card.migrated{opacity:.35;border-style:dashed;}
-.card.dropped{opacity:.25;text-decoration:line-through;}
-.card-text{padding-right:22px;font-size:12.5px;}
-.card-meta{display:flex;gap:6px;margin-top:5px;flex-wrap:wrap;align-items:center;}
-.card-deadline{font-size:10px;font-family:var(--mono);color:var(--blue);}
-.card-deadline.urgent{color:var(--red);}
-.card-note{font-size:11px;color:var(--muted);margin-top:4px;}
-.card-check{position:absolute;top:8px;right:8px;width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .15s;background:transparent;}
-.card-check.checked{background:var(--green);border-color:var(--green);color:#fff;}
-
-/* Kho / Backlog */
-.kho-wrap{flex:1;overflow-y:auto;padding:20px;}
-.kho-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.kho-title{font-family:var(--serif);font-size:22px;}
-.kho-count{font-family:var(--mono);font-size:12px;color:var(--muted);}
-.kho-group{margin-bottom:20px;}
-.kho-group-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px;}
-.kho-cards{display:flex;flex-direction:column;gap:6px;}
-.kho-card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
-.kho-card-text{flex:1;line-height:1.5;}
-.kho-card-meta{font-size:10px;color:var(--muted);font-family:var(--mono);white-space:nowrap;}
-.kho-card-actions{display:flex;gap:5px;flex-shrink:0;}
-.kbtn{font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:var(--font);transition:all .15s;}
-.kbtn:hover{border-color:var(--orange);color:var(--orange);}
-.kbtn.del{color:var(--muted);}
-.kbtn.del:hover{border-color:var(--red);color:var(--red);}
-
-/* Review mode */
-.review-wrap{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px;}
-.review-section{background:var(--paper);border:1px solid var(--border);border-radius:10px;padding:16px;}
-.review-section h3{font-size:13px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-.review-items{display:flex;flex-direction:column;gap:8px;}
-.review-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;background:var(--surface);font-size:13px;}
-.review-item-text{flex:1;}
-.review-actions{display:flex;gap:6px;}
-.raction{font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);cursor:pointer;font-family:var(--font);transition:all .15s;background:var(--paper);}
-.raction:hover{opacity:.8;}
-.raction.migrate{border-color:var(--blue);color:var(--blue);}
-.raction.drop{border-color:var(--red);color:var(--red);}
-.raction.done-mark{border-color:var(--green);color:var(--green);}
-
-/* Morning brief panel */
+/* BRIEF */
 .brief-wrap{flex:1;overflow-y:auto;padding:24px 28px;}
 .brief-greeting{font-family:var(--serif);font-size:28px;margin-bottom:4px;}
-.brief-sub{color:var(--muted);font-size:14px;margin-bottom:24px;}
-.brief-section{margin-bottom:20px;}
-.brief-section h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px;}
+.brief-sub{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.6;}
+.brief-section{margin-bottom:18px;}
+.brief-section h3{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:9px;}
 .brief-cards{display:flex;flex-direction:column;gap:7px;}
 .brief-card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:11px 14px;font-size:13px;line-height:1.5;display:flex;align-items:flex-start;gap:10px;}
 .brief-card-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0;}
-.brief-card-text{flex:1;}
-.brief-card-badge{font-size:10px;font-family:var(--mono);padding:2px 7px;border-radius:10px;white-space:nowrap;}
-.btn-start-day{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:12px 24px;font-family:var(--font);font-weight:600;font-size:14px;cursor:pointer;transition:opacity .2s;margin-top:8px;}
+.brief-card-body{flex:1;}
+.brief-card-reason{font-size:11px;color:var(--muted);margin-top:3px;}
+.brief-card-impact{font-size:11px;color:var(--red);margin-top:3px;}
+.brief-card-badge{font-size:10px;font-family:var(--mono);padding:2px 7px;border-radius:10px;background:#eef4fb;color:var(--blue);white-space:nowrap;margin-top:4px;display:inline-block;}
+.btn-start-day{background:var(--orange);color:#fff;border:none;border-radius:8px;padding:12px 24px;font-family:var(--font);font-weight:600;font-size:14px;cursor:pointer;transition:opacity .2s;margin-top:10px;}
 .btn-start-day:hover{opacity:.85;}
 
-/* Input add bar */
-.add-bar{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;background:var(--paper);}
-.add-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--ink);font-family:var(--font);font-size:13px;padding:9px 12px;outline:none;}
+/* DAILY BOARD */
+.add-bar{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;gap:8px;background:var(--paper);}
+.add-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--ink);font-family:var(--font);font-size:13px;padding:8px 12px;outline:none;}
 .add-input:focus{border-color:var(--orange);}
-.add-btn{background:var(--ink);color:var(--bg);border:none;border-radius:8px;padding:9px 16px;font-family:var(--font);font-weight:500;font-size:13px;cursor:pointer;transition:opacity .2s;white-space:nowrap;}
+.add-btn{background:var(--ink);color:var(--bg);border:none;border-radius:8px;padding:8px 14px;font-family:var(--font);font-weight:500;font-size:13px;cursor:pointer;white-space:nowrap;transition:opacity .2s;}
 .add-btn:hover{opacity:.8;}
-
-/* Stats bar */
-.stats-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--paper);}
+.stats-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--border);background:var(--paper);}
 .stats-left{display:flex;gap:14px;}
 .stat{font-size:12px;color:var(--muted);font-family:var(--mono);}
 .stat span{color:var(--ink);font-weight:500;}
-.btn-review{background:var(--ink);color:var(--bg);border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-family:var(--font);cursor:pointer;transition:opacity .2s;}
-.btn-review:hover{opacity:.8;}
+.btn-eod{background:var(--ink);color:var(--bg);border:none;border-radius:6px;padding:5px 12px;font-size:12px;font-family:var(--font);cursor:pointer;transition:opacity .2s;}
+.btn-eod:hover{opacity:.8;}
+.board-wrap{flex:1;overflow-x:auto;overflow-y:hidden;display:flex;}
+.col{min-width:195px;max-width:195px;display:flex;flex-direction:column;border-right:1px solid var(--border);}
+.col-head{padding:11px 13px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:7px;border-bottom:1px solid var(--border);background:var(--paper);}
+.col-stripe{width:3px;height:13px;border-radius:2px;flex-shrink:0;}
+.col-tasks{flex:1;overflow-y:auto;padding:9px;display:flex;flex-direction:column;gap:7px;}
+.card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-size:12px;line-height:1.5;position:relative;transition:border-color .15s,transform .15s;}
+.card:hover{border-color:var(--orange);transform:translateY(-1px);}
+.card.done{opacity:.38;}
+.card.done .card-text{text-decoration:line-through;}
+.card-text{padding-right:22px;}
+.card-dl{font-size:10px;font-family:var(--mono);color:var(--blue);margin-top:4px;}
+.card-dl.near{color:var(--red);}
+.card-note{font-size:10px;color:var(--muted);margin-top:3px;}
+.card-check{position:absolute;top:7px;right:7px;width:17px;height:17px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:9px;transition:all .15s;background:transparent;}
+.card-check.on{background:var(--green);border-color:var(--green);color:#fff;}
+.empty-col{font-size:11px;color:var(--border);text-align:center;padding:14px 6px;}
 
-/* Util */
+/* REVIEW */
+.review-outer{flex:1;overflow-y:auto;}
+.review-wrap{padding:20px;display:flex;flex-direction:column;gap:14px;}
+.review-title{font-family:var(--serif);font-size:22px;margin-bottom:4px;}
+.review-section{background:var(--paper);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.review-section h3{font-size:12px;font-weight:600;margin-bottom:11px;display:flex;align-items:center;gap:7px;}
+.review-item{display:flex;align-items:flex-start;gap:9px;padding:8px 10px;border-radius:7px;background:var(--surface);font-size:13px;margin-bottom:7px;}
+.review-item-text{flex:1;line-height:1.5;}
+.review-actions{display:flex;gap:5px;flex-shrink:0;margin-top:2px;}
+.rac{font-size:11px;padding:3px 9px;border-radius:5px;border:1px solid var(--border);cursor:pointer;font-family:var(--font);transition:all .15s;background:var(--paper);}
+.rac.done2{border-color:var(--green);color:var(--green);}
+.rac.migrate{border-color:var(--blue);color:var(--blue);}
+.rac.drop{border-color:var(--red);color:var(--red);}
+.rac:disabled{opacity:.4;cursor:default;}
+.ai-summary-box{font-size:13px;line-height:1.7;color:var(--ink);}
+
+/* KHO */
+.kho-outer{flex:1;overflow-y:auto;}
+.kho-wrap{padding:20px;}
+.kho-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.kho-title{font-family:var(--serif);font-size:22px;}
+.kho-count{font-family:var(--mono);font-size:12px;color:var(--muted);}
+.kho-group{margin-bottom:18px;}
+.kho-group-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:7px;}
+.kho-card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:10px 13px;font-size:13px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px;}
+.kho-card-body{flex:1;}
+.kho-card-note{font-size:11px;color:var(--muted);margin-top:3px;}
+.kho-card-meta{font-size:10px;color:var(--muted);font-family:var(--mono);}
+.kho-actions{display:flex;gap:5px;flex-shrink:0;flex-direction:column;align-items:flex-end;}
+.kbtn{font-size:10px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:var(--font);transition:all .15s;white-space:nowrap;}
+.kbtn:hover{border-color:var(--orange);color:var(--orange);}
+.kbtn.del:hover{border-color:var(--red);color:var(--red);}
+
+/* Loading */
 .loading-dot{animation:blink 1.2s infinite;display:inline-block;}
 .loading-dot:nth-child(2){animation-delay:.2s;}
 .loading-dot:nth-child(3){animation-delay:.4s;}
@@ -147,7 +151,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
-.empty-col{font-size:11px;color:var(--border);text-align:center;padding:16px 8px;}
+
+/* Toast */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:13px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;}
+.toast.show{opacity:1;}
 </style>
 </head>
 <body>
@@ -158,14 +165,18 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
   <div class="topbar-right">
     <div class="date-chip" id="dateChip"></div>
     <div class="api-wrap">
-      <span class="api-label">API</span>
-      <input class="api-input" id="apiInput" type="password" placeholder="sk-ant-api03-..." oninput="onApiKey(this.value)">
-      <span id="apiStatus" class="api-ok" style="display:none">✓</span>
+      <span class="api-label">Claude API</span>
+      <input class="api-input" id="apiInput" type="password" placeholder="sk-ant-..." oninput="onApiKey(this.value)">
     </div>
+    <button class="drive-btn" id="driveBtn" onclick="handleDriveAuth()">
+      <div class="drive-dot" id="driveDot"></div>
+      <span id="driveBtnText">Kết nối Drive</span>
+    </button>
+    <span class="sync-status" id="syncStatus"></span>
   </div>
 </div>
 
-<!-- MODE TABS -->
+<!-- MODES -->
 <div class="modes">
   <button class="mode-btn active" id="tab-brief" onclick="setMode('brief')">☀ Sáng</button>
   <button class="mode-btn" id="tab-daily" onclick="setMode('daily')">📋 Hôm nay</button>
@@ -173,10 +184,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
   <button class="mode-btn" id="tab-kho" onclick="setMode('kho')">🗄 Kho việc</button>
 </div>
 
-<!-- MAIN -->
+<!-- LAYOUT -->
 <div class="layout">
 
-  <!-- LEFT: CHAT always visible -->
+  <!-- CHAT -->
   <div class="chat-panel">
     <div class="chat-header">
       <div class="chat-title">Thư ký AI</div>
@@ -185,52 +196,53 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
     <div class="chat-msgs" id="chatMsgs"></div>
     <div class="chat-input-wrap">
       <div class="quick-btns">
-        <button class="qbtn" onclick="quickSend('Giờ anh làm gì được?')">Làm gì giờ?</button>
-        <button class="qbtn" onclick="quickSend('Stress quá, việc quan trọng nhất là gì?')">Stress ơi</button>
+        <button class="qbtn" onclick="quickSend('Giờ này anh làm gì được?')">Làm gì giờ?</button>
+        <button class="qbtn" onclick="quickSend('Stress quá, việc nào quan trọng nhất cần làm ngay?')">Stress ơi</button>
         <button class="qbtn" onclick="quickSend('Tổng quan hôm nay thế nào?')">Overview</button>
-        <button class="qbtn" onclick="quickSend('Còn bao nhiêu việc chưa xong?')">Còn bao nhiêu?</button>
+        <button class="qbtn" onclick="quickSend('Còn bao nhiêu việc chưa xong hôm nay?')">Còn bao nhiêu?</button>
       </div>
       <div class="chat-row">
-        <textarea class="chat-input" id="chatInput" placeholder="Nhắn gì cũng được…" rows="1" onkeydown="onChatKey(event)" oninput="autoResize(this)"></textarea>
+        <textarea class="chat-input" id="chatInput" placeholder="Nhắn gì cũng được…" rows="1"
+          onkeydown="onChatKey(event)" oninput="autoResize(this)"></textarea>
         <button class="send-btn" onclick="sendChat()">↑</button>
       </div>
     </div>
   </div>
 
-  <!-- RIGHT PANEL -->
-  <div class="right-panel" id="rightPanel">
+  <!-- RIGHT -->
+  <div class="right-panel">
 
-    <!-- BRIEF VIEW -->
+    <!-- BRIEF -->
     <div id="view-brief" class="brief-wrap">
       <div class="brief-greeting" id="briefGreeting">Chào buổi sáng, Luan.</div>
-      <div class="brief-sub" id="briefSub">Đang chuẩn bị brief cho anh…</div>
+      <div class="brief-sub" id="briefSub">Đang chuẩn bị brief…</div>
       <div id="briefContent"></div>
     </div>
 
-    <!-- DAILY VIEW -->
+    <!-- DAILY -->
     <div id="view-daily" style="display:none;flex:1;flex-direction:column;overflow:hidden;">
       <div class="add-bar">
-        <input class="add-input" id="addInput" placeholder="Nhập việc mới — thô cũng được, thư ký sẽ phân tích…" onkeydown="if(event.key==='Enter') addTask()">
+        <input class="add-input" id="addInput" placeholder="Nhập việc mới bất kỳ — thô cũng được…" onkeydown="if(event.key==='Enter')addTask()">
         <button class="add-btn" onclick="addTask()">+ Thêm</button>
       </div>
       <div class="stats-bar">
         <div class="stats-left">
-          <div class="stat">Xong: <span id="statDone">0</span></div>
-          <div class="stat">Còn: <span id="statLeft">0</span></div>
-          <div class="stat">Kho: <span id="statKho">0</span></div>
+          <div class="stat">Xong: <span id="sDone">0</span></div>
+          <div class="stat">Còn: <span id="sLeft">0</span></div>
+          <div class="stat">Kho: <span id="sKho">0</span></div>
         </div>
-        <button class="btn-review" onclick="setMode('review')">→ Tổng kết cuối ngày</button>
+        <button class="btn-eod" onclick="setMode('review')">🌙 Tổng kết ngày</button>
       </div>
       <div class="board-wrap" id="boardWrap"></div>
     </div>
 
-    <!-- REVIEW VIEW -->
-    <div id="view-review" style="display:none;flex:1;overflow-y:auto;">
+    <!-- REVIEW -->
+    <div id="view-review" class="review-outer" style="display:none;">
       <div class="review-wrap" id="reviewContent"></div>
     </div>
 
-    <!-- KHO VIEW -->
-    <div id="view-kho" style="display:none;flex:1;overflow-y:auto;">
+    <!-- KHO -->
+    <div id="view-kho" class="kho-outer" style="display:none;">
       <div class="kho-wrap">
         <div class="kho-header">
           <div class="kho-title">Kho việc</div>
@@ -243,467 +255,463 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
   </div>
 </div>
 
-<script>
-// ═══════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════
-const KEYS = { tasks:'sk2_tasks', kho:'sk2_kho', log:'sk2_log', api:'sk2_api', lastDate:'sk2_date' };
-let state = { tasks:[], kho:[], log:[], today:todayStr() };
-let chatHistory = [];
-let currentMode = 'brief';
+<div class="toast" id="toast"></div>
 
-function todayStr(){ return new Date().toISOString().slice(0,10); }
+<script>
+// ═══════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════
+const GOOGLE_CLIENT_ID = '356592007545-e6poq5irp699hj93vfvkqjl7uh5mdggm.apps.googleusercontent.com';
+const DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
+const FOLDER_NAME = 'Thư Ký AI';
+const FILE_NAME   = 'secretary_data.json';
+
+// ═══════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════
+let S = { tasks:[], kho:[], chatLog:[] };
+let chatHistory = [];
+let driveToken  = null;
+let driveFolderId = null;
+let driveFileId   = null;
+let currentMode = 'brief';
+let syncTimer   = null;
 
 const COLS = [
-  {id:'urgent',   label:'Gấp hôm nay',       color:'#c0392b'},
-  {id:'today',    label:'Quan trọng hôm nay', color:'#ec872b'},
-  {id:'presence', label:'Cần có mặt',         color:'#2c5f8a'},
-  {id:'important',label:'Quan trọng',         color:'#b8860b'},
-  {id:'should',   label:'Nên làm',            color:'#2d7d5f'},
-  {id:'want',     label:'Muốn làm',           color:'#6b4c9a'},
-  {id:'other',    label:'Khác',               color:'#8a8478'},
+  {id:'urgent',    label:'Gấp hôm nay',       color:'#c0392b'},
+  {id:'today',     label:'Quan trọng hôm nay', color:'#ec872b'},
+  {id:'presence',  label:'Cần có mặt',         color:'#2c5f8a'},
+  {id:'important', label:'Quan trọng',         color:'#b8860b'},
+  {id:'should',    label:'Nên làm',            color:'#2d7d5f'},
+  {id:'want',      label:'Muốn làm',           color:'#6b4c9a'},
+  {id:'other',     label:'Khác',               color:'#8a8478'},
 ];
 
-// ═══════════════════════════════════════════════════════
-// STORAGE
-// ═══════════════════════════════════════════════════════
-function save(){
-  try {
-    localStorage.setItem(KEYS.tasks, JSON.stringify(state.tasks));
-    localStorage.setItem(KEYS.kho,   JSON.stringify(state.kho));
-    localStorage.setItem(KEYS.log,   JSON.stringify(state.log));
-    localStorage.setItem(KEYS.lastDate, state.today);
-  } catch(e){}
-}
-function load(){
-  try {
-    state.tasks = JSON.parse(localStorage.getItem(KEYS.tasks)||'[]');
-    state.kho   = JSON.parse(localStorage.getItem(KEYS.kho)||'[]');
-    state.log   = JSON.parse(localStorage.getItem(KEYS.log)||'[]');
-  } catch(e){}
-}
-function getApiKey(){ return (localStorage.getItem(KEYS.api)||'').trim(); }
-function onApiKey(v){
-  try{ localStorage.setItem(KEYS.api,v); }catch(e){}
-  const ok = v.startsWith('sk-ant');
-  document.getElementById('apiStatus').style.display = ok?'block':'none';
+// ═══════════════════════════════════════════════════
+// LOCAL STORAGE (fallback khi chưa connect Drive)
+// ═══════════════════════════════════════════════════
+const LS = {
+  saveApi(v){ try{localStorage.setItem('tk_api',v);}catch(e){} },
+  loadApi(){ try{return localStorage.getItem('tk_api')||'';}catch(e){return '';} },
+  saveToken(t){ try{localStorage.setItem('tk_gtoken',t);}catch(e){} },
+  loadToken(){ try{return localStorage.getItem('tk_gtoken')||null;}catch(e){return null;} },
+  saveLocal(){ try{localStorage.setItem('tk_data',JSON.stringify(S));}catch(e){} },
+  loadLocal(){ try{const d=localStorage.getItem('tk_data');return d?JSON.parse(d):null;}catch(e){return null;} },
+};
+
+// ═══════════════════════════════════════════════════
+// GOOGLE DRIVE
+// ═══════════════════════════════════════════════════
+function handleDriveAuth(){
+  if(driveToken){ driveDisconnect(); return; }
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: GOOGLE_CLIENT_ID,
+    scope: DRIVE_SCOPE,
+    callback: async(resp)=>{
+      if(resp.error){ showToast('❌ Lỗi đăng nhập Google'); return; }
+      driveToken = resp.access_token;
+      LS.saveToken(driveToken);
+      setDriveUI(true);
+      showToast('✓ Đã kết nối Google Drive');
+      await driveInit();
+    }
+  });
+  client.requestAccessToken();
 }
 
-// ═══════════════════════════════════════════════════════
-// CLAUDE API
-// ═══════════════════════════════════════════════════════
-async function claude(system, messages, json=false){
-  const key = getApiKey();
-  if(!key) throw new Error('NO_KEY');
-  const res = await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-api-key': key,
-      'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access':'true'
-    },
-    body: JSON.stringify({
-      model:'claude-sonnet-4-20250514',
-      max_tokens:2000,
-      system,
-      messages
-    })
+function driveDisconnect(){
+  driveToken=null; driveFolderId=null; driveFileId=null;
+  LS.saveToken('');
+  setDriveUI(false);
+  showToast('Đã ngắt kết nối Drive');
+}
+
+function setDriveUI(on){
+  document.getElementById('driveDot').className='drive-dot'+(on?' on':'');
+  document.getElementById('driveBtnText').textContent=on?'Drive ✓':'Kết nối Drive';
+  document.getElementById('driveBtn').className='drive-btn'+(on?' connected':'');
+}
+
+async function driveInit(){
+  // Find or create folder
+  let res = await driveReq(`https://www.googleapis.com/drive/v3/files?q=name='${FOLDER_NAME}' and mimeType='application/vnd.google-apps.folder' and trashed=false&fields=files(id,name)`);
+  if(res.files?.length){ driveFolderId=res.files[0].id; }
+  else {
+    const f = await driveReq('https://www.googleapis.com/drive/v3/files',{method:'POST',body:JSON.stringify({name:FOLDER_NAME,mimeType:'application/vnd.google-apps.folder'})});
+    driveFolderId=f.id;
+  }
+  // Find or load data file
+  res = await driveReq(`https://www.googleapis.com/drive/v3/files?q=name='${FILE_NAME}' and '${driveFolderId}' in parents and trashed=false&fields=files(id,name)`);
+  if(res.files?.length){
+    driveFileId=res.files[0].id;
+    await driveLoad();
+  } else {
+    await driveSave(); // create new
+  }
+  renderAll();
+  setSyncStatus('✓ Drive đồng bộ');
+}
+
+async function driveLoad(){
+  const res = await fetch(`https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media`,{
+    headers:{Authorization:'Bearer '+driveToken}
   });
-  if(!res.ok){ const e=await res.json().catch(()=>({})); throw new Error(e.error?.message||`HTTP ${res.status}`); }
+  if(!res.ok) return;
   const data = await res.json();
-  const text = data.content?.[0]?.text||'';
-  if(json){ try{ return JSON.parse(text.replace(/```json|```/g,'').trim()); }catch(e){ throw new Error('JSON parse failed: '+text.slice(0,100)); } }
+  if(data && data.tasks !== undefined) S = data;
+  setSyncStatus('✓ Đã tải từ Drive');
+}
+
+async function driveSave(){
+  setSyncStatus('⟳ Đang lưu…');
+  const body = JSON.stringify(S, null, 2);
+  const blob = new Blob([body],{type:'application/json'});
+  if(!driveFileId){
+    // Create
+    const meta = JSON.stringify({name:FILE_NAME,parents:[driveFolderId]});
+    const form = new FormData();
+    form.append('metadata',new Blob([meta],{type:'application/json'}));
+    form.append('file',blob);
+    const res = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',{
+      method:'POST',headers:{Authorization:'Bearer '+driveToken},body:form
+    });
+    const data = await res.json();
+    driveFileId = data.id;
+  } else {
+    // Update
+    await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`,{
+      method:'PATCH',headers:{Authorization:'Bearer '+driveToken,'Content-Type':'application/json'},body
+    });
+  }
+  setSyncStatus('✓ Drive đã lưu lúc '+new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'}));
+  LS.saveLocal();
+}
+
+async function driveReq(url, opts={}){
+  const res = await fetch(url,{
+    ...opts,
+    headers:{'Authorization':'Bearer '+driveToken,'Content-Type':'application/json',...(opts.headers||{})}
+  });
+  return res.json();
+}
+
+function scheduleSave(){
+  LS.saveLocal();
+  if(!driveToken) return;
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(driveSave, 2000);
+}
+
+function setSyncStatus(t){ document.getElementById('syncStatus').textContent=t; }
+
+// ═══════════════════════════════════════════════════
+// CLAUDE API
+// ═══════════════════════════════════════════════════
+function getApiKey(){ return (document.getElementById('apiInput').value||'').trim(); }
+function onApiKey(v){ LS.saveApi(v); }
+
+async function claude(system, messages, json=false){
+  const key=getApiKey();
+  if(!key) throw new Error('NO_KEY');
+  const res=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,system,messages})
+  });
+  if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||'HTTP '+res.status);}
+  const d=await res.json();
+  const text=d.content?.[0]?.text||'';
+  if(json){try{return JSON.parse(text.replace(/```json|```/g,'').trim());}catch(e){throw new Error('Parse lỗi');}}
   return text;
 }
 
-function buildContext(){
-  const done = state.tasks.filter(t=>t.status==='done').length;
-  const left = state.tasks.filter(t=>t.status==='active').length;
-  const taskList = state.tasks.map(t=>`[${t.col}|${t.status}] ${t.text}${t.deadline?' (deadline:'+t.deadline+')':''}${t.note?' — '+t.note:''}`).join('\n');
-  const khoList = state.kho.map(t=>`[${t.col}] ${t.text}${t.deadline?' (deadline:'+t.deadline+')':''}`).join('\n');
-  return `Ngày hôm nay: ${state.today}
-Anh tên Luan, chủ Lantern Travel (du lịch inbound Việt Nam) và Lumi Á Đông Travel (outbound Nhật, Trung, Hàn).
-Anh làm việc theo Bullet Journal của Ryan Carroll.
+function buildCtx(){
+  const done=S.tasks.filter(t=>t.status==='done').length;
+  const left=S.tasks.filter(t=>t.status==='active').length;
+  return `Ngày hôm nay: ${new Date().toLocaleDateString('vi-VN',{weekday:'long',day:'2-digit',month:'2-digit',year:'numeric'})}
+Anh tên Luan, chủ Lantern Travel (du lịch inbound miền Bắc Việt Nam) và Lumi Á Đông Travel (outbound Nhật, Trung, Hàn). Làm theo Bullet Journal.
 
-CÔNG VIỆC HÔM NAY (${done} xong, ${left} còn):
-${taskList||'(chưa có)'}
+CÔNG VIỆC HÔM NAY (${done} xong / ${left} còn lại):
+${S.tasks.map(t=>`[${t.col}|${t.status}] ${t.text}${t.deadline?' (deadline:'+t.deadline+')':''}${t.note?' — '+t.note:''}`).join('\n')||'(chưa có)'}
 
-KHO VIỆC (backlog):
-${khoList||'(rỗng)'}`;
+KHO VIỆC (backlog migrate):
+${S.kho.filter(t=>t.status!=='dropped').map(t=>`[${t.col}] ${t.text}${t.deadline?' ('+t.deadline+')':''}`).join('\n')||'(rỗng)'}`;
 }
 
-// ═══════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════
-function init(){
-  // Date display
-  const now = new Date();
-  document.getElementById('dateChip').textContent =
-    now.toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'});
-
-  // Load API key
-  const savedKey = getApiKey();
-  if(savedKey){
-    document.getElementById('apiInput').value = savedKey;
-    document.getElementById('apiStatus').style.display = 'block';
-  }
-
-  // Load data
-  load();
-  renderBoard();
-  renderKho();
-
-  // Morning brief
-  morningBrief();
-}
-
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 // MORNING BRIEF
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 async function morningBrief(){
-  const hour = new Date().getHours();
-  const greeting = hour<12 ? 'Chào buổi sáng' : hour<18 ? 'Xin chào' : 'Chào buổi tối';
-  document.getElementById('briefGreeting').textContent = `${greeting}, Luan.`;
-
+  const h=new Date().getHours();
+  const g=h<12?'Chào buổi sáng':h<18?'Xin chào':h<21?'Chào buổi tối':'Chào anh';
+  document.getElementById('briefGreeting').textContent=`${g}, Luan.`;
   if(!getApiKey()){
-    document.getElementById('briefSub').textContent = 'Nhập API key ở trên để em brief cho anh.';
-    addMsg('ai', 'Anh ơi, anh nhập API key vào ô bên trên để em bắt đầu nhé. Lấy key tại console.anthropic.com → API Keys.');
+    document.getElementById('briefSub').textContent='Nhập Claude API key ở trên để bắt đầu.';
+    addMsg('ai','Anh nhập Claude API key vào ô bên trên (sk-ant-...) để em brief cho anh nhé. Lấy key tại console.anthropic.com');
     return;
   }
-
-  document.getElementById('briefSub').textContent = 'Đang chuẩn bị…';
-
-  const systemPrompt = `Bạn là thư ký AI của anh Luan. Tạo morning brief ngắn gọn, thực tế.
-Trả về JSON:
-{
-  "greeting": "1 câu chào + nhận xét tình hình ngắn",
-  "focus_today": [{"text":"việc cần làm hôm nay","reason":"lý do ngắn","urgency":"high|mid|low","deadline":"nếu có"}],
-  "bottleneck": [{"text":"việc đang/sẽ gây tắc nghẽn","impact":"hậu quả nếu không làm"}],
-  "from_kho": [{"text":"việc từ kho nên đưa vào hôm nay","reason":"lý do"}],
-  "summary": "1-2 câu tổng quan để anh bắt đầu ngày"
-}`;
-
-  const loadId = addLoading();
-  try {
-    const result = await claude(systemPrompt, [{role:'user', content: buildContext()}], true);
+  document.getElementById('briefSub').textContent='Đang chuẩn bị brief…';
+  const loadId=addLoading();
+  const sys=`Bạn là thư ký AI. Tạo morning brief thực tế, ngắn gọn. Trả về JSON thuần:
+{"greeting":"1 câu nhận xét tình hình","focus":[{"text":"việc cần làm","reason":"lý do ngắn","urgency":"high|mid|low","deadline":"nếu có hoặc null"}],"bottleneck":[{"text":"việc sẽ gây tắc nghẽn","impact":"hậu quả"}],"from_kho":[{"text":"việc từ kho nên làm hôm nay","reason":"lý do"}],"summary":"1-2 câu tổng quan để anh bắt đầu ngày"}`;
+  try{
+    const r=await claude(sys,[{role:'user',content:buildCtx()}],true);
     removeMsg(loadId);
-
-    // Build brief UI
-    const briefEl = document.getElementById('briefContent');
-    briefEl.innerHTML = '';
-
-    if(result.focus_today?.length){
-      briefEl.innerHTML += `<div class="brief-section"><h3>⚡ Việc cần làm hôm nay</h3><div class="brief-cards">${
-        result.focus_today.map(t=>`<div class="brief-card">
-          <div class="brief-card-dot" style="background:${t.urgency==='high'?'#c0392b':t.urgency==='mid'?'#ec872b':'#2d7d5f'}"></div>
-          <div class="brief-card-text">${t.text}${t.reason?'<div style="font-size:11px;color:var(--muted);margin-top:3px">'+t.reason+'</div>':''}</div>
-          ${t.deadline?`<span class="brief-card-badge" style="background:#eef4fb;color:#2c5f8a">${t.deadline}</span>`:''}
-        </div>`).join('')
-      }</div></div>`;
-    }
-
-    if(result.bottleneck?.length){
-      briefEl.innerHTML += `<div class="brief-section"><h3>🚧 Cổ chai cần tránh</h3><div class="brief-cards">${
-        result.bottleneck.map(t=>`<div class="brief-card">
-          <div class="brief-card-dot" style="background:#c0392b"></div>
-          <div class="brief-card-text">${t.text}${t.impact?'<div style="font-size:11px;color:#c0392b;margin-top:3px">→ '+t.impact+'</div>':''}</div>
-        </div>`).join('')
-      }</div></div>`;
-    }
-
-    if(result.from_kho?.length){
-      briefEl.innerHTML += `<div class="brief-section"><h3>🗄 Từ Kho — nên làm hôm nay</h3><div class="brief-cards">${
-        result.from_kho.map(t=>`<div class="brief-card">
-          <div class="brief-card-dot" style="background:#2c5f8a"></div>
-          <div class="brief-card-text">${t.text}${t.reason?'<div style="font-size:11px;color:var(--muted);margin-top:3px">'+t.reason+'</div>':''}</div>
-        </div>`).join('')
-      }</div></div>`;
-    }
-
-    briefEl.innerHTML += `<button class="btn-start-day" onclick="setMode('daily')">Bắt đầu ngày → Mở bảng công việc</button>`;
-
-    document.getElementById('briefSub').textContent = result.summary||'';
-    addMsg('ai', (result.greeting||'Chào anh!') + '\n\n' + (result.summary||''));
-    chatHistory = [{role:'user',content:buildContext()},{role:'assistant',content:JSON.stringify(result)}];
-  } catch(e){
+    const bc=document.getElementById('briefContent');
+    bc.innerHTML='';
+    if(r.focus?.length) bc.innerHTML+=section('⚡ Cần làm hôm nay',r.focus.map(t=>`<div class="brief-card"><div class="brief-card-dot" style="background:${t.urgency==='high'?'#c0392b':t.urgency==='mid'?'#ec872b':'#2d7d5f'}"></div><div class="brief-card-body"><div>${t.text}</div>${t.reason?`<div class="brief-card-reason">${t.reason}</div>`:''}${t.deadline?`<span class="brief-card-badge">📅 ${t.deadline}</span>`:''}</div></div>`).join(''));
+    if(r.bottleneck?.length) bc.innerHTML+=section('🚧 Cổ chai cần tránh',r.bottleneck.map(t=>`<div class="brief-card"><div class="brief-card-dot" style="background:#c0392b"></div><div class="brief-card-body"><div>${t.text}</div>${t.impact?`<div class="brief-card-impact">→ ${t.impact}</div>`:''}</div></div>`).join(''));
+    if(r.from_kho?.length) bc.innerHTML+=section('🗄 Từ Kho — nên làm hôm nay',r.from_kho.map(t=>`<div class="brief-card"><div class="brief-card-dot" style="background:#2c5f8a"></div><div class="brief-card-body"><div>${t.text}</div>${t.reason?`<div class="brief-card-reason">${t.reason}</div>`:''}</div></div>`).join(''));
+    bc.innerHTML+=`<button class="btn-start-day" onclick="setMode('daily')">Bắt đầu ngày → Mở bảng công việc</button>`;
+    document.getElementById('briefSub').textContent=r.summary||'';
+    addMsg('ai',(r.greeting||'Chào anh!')+'\n\n'+(r.summary||'Hôm nay cũng sẽ là một ngày tốt.'));
+    chatHistory=[{role:'user',content:buildCtx()},{role:'assistant',content:JSON.stringify(r)}];
+  }catch(e){
     removeMsg(loadId);
-    const msg = e.message==='NO_KEY' ? 'Anh nhập API key ở trên nhé!' : 'Lỗi: '+e.message;
-    document.getElementById('briefSub').textContent = msg;
-    addMsg('ai', msg);
+    const m=e.message==='NO_KEY'?'Anh nhập API key nhé!':'Lỗi: '+e.message;
+    document.getElementById('briefSub').textContent=m;
+    addMsg('ai',m);
   }
 }
+function section(title,inner){ return `<div class="brief-section"><h3>${title}</h3><div class="brief-cards">${inner}</div></div>`; }
 
-// ═══════════════════════════════════════════════════════
-// ADD TASK (với AI phân tích)
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+// ADD TASK
+// ═══════════════════════════════════════════════════
 async function addTask(){
-  const input = document.getElementById('addInput');
-  const raw = input.value.trim();
+  const inp=document.getElementById('addInput');
+  const raw=inp.value.trim();
   if(!raw) return;
-  input.value = '';
-  if(!getApiKey()){ addMsg('ai','Anh nhập API key ở trên nhé!'); return; }
-
-  addMsg('user', raw);
-  const loadId = addLoading();
-
-  const sys = `Bạn là thư ký AI. Phân tích input và trả về JSON:
-{"tasks":[{"id":"t_${Date.now()}_N","text":"tên việc ngắn gọn","col":"urgent|today|presence|important|should|want|other","deadline":"ngày/thứ tự nhiên hoặc null","note":"ghi chú nếu cần hoặc null","status":"active"}],"clarify":"câu hỏi làm rõ nếu cần hoặc null","reply":"phản hồi ngắn cho anh biết"}
-Nếu input có nhiều việc thì tách thành nhiều task. Deadline dạng text tự nhiên (VD: "thứ 6", "tuần sau").`;
-
-  try {
-    const result = await claude(sys, [{role:'user',content:`Context: ${buildContext()}\n\nInput mới: ${raw}`}], true);
+  inp.value='';
+  if(!getApiKey()){addMsg('ai','Anh nhập Claude API key ở trên nhé!');return;}
+  addMsg('user',raw);
+  const loadId=addLoading();
+  const sys=`Bạn là thư ký AI của anh Luan. Phân tích input và trả về JSON thuần:
+{"tasks":[{"id":"t${Date.now()}","text":"tên việc ngắn gọn rõ ràng","col":"urgent|today|presence|important|should|want|other","deadline":"text tự nhiên hoặc null","note":"ghi chú hoặc null","status":"active"}],"clarify":"câu hỏi làm rõ nếu cần, null nếu không","reply":"phản hồi ngắn cho anh"}
+Nếu có nhiều việc thì tách ra nhiều task. Deadline dạng "thứ 6", "tuần sau", "15/5" v.v.
+col: urgent=gấp ngay hôm nay, today=quan trọng hôm nay, presence=cần có mặt, important=quan trọng chưa cần ngay, should=nên làm, want=muốn làm, other=khác`;
+  try{
+    const r=await claude(sys,[{role:'user',content:'Context:\n'+buildCtx()+'\n\nInput mới: '+raw}],true);
     removeMsg(loadId);
-
-    if(result.tasks?.length){
-      result.tasks.forEach(t=>{ state.tasks.push(t); });
-      save(); renderBoard();
-    }
-    if(result.reply) addMsg('ai', result.reply+(result.clarify?'\n\n'+result.clarify:''));
-    else addMsg('ai', `Đã thêm ${result.tasks?.length||0} việc vào bảng.`);
-    chatHistory.push({role:'user',content:raw},{role:'assistant',content:JSON.stringify(result)});
-  } catch(e){
-    removeMsg(loadId);
-    addMsg('ai','Lỗi: '+e.message);
-  }
+    if(r.tasks?.length){ r.tasks.forEach(t=>S.tasks.push(t)); scheduleSave(); renderBoard(); }
+    addMsg('ai',r.reply+(r.clarify?'\n\n'+r.clarify:''));
+    chatHistory.push({role:'user',content:raw},{role:'assistant',content:JSON.stringify(r)});
+  }catch(e){ removeMsg(loadId); addMsg('ai','Lỗi: '+e.message); }
 }
 
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 // CHAT
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
 async function sendChat(){
-  const input = document.getElementById('chatInput');
-  const msg = input.value.trim();
+  const inp=document.getElementById('chatInput');
+  const msg=inp.value.trim();
   if(!msg) return;
-  input.value = ''; autoResize(input);
-  if(!getApiKey()){ addMsg('ai','Anh nhập API key ở trên nhé!'); return; }
-  addMsg('user', msg);
-  const loadId = addLoading();
-  const sys = `Bạn là thư ký AI của anh Luan. Trả lời ngắn gọn, thực tế, tiếng Việt.
-Anh làm theo Bullet Journal. Khi anh hỏi làm gì thì gợi ý việc phù hợp thời điểm.
-Khi anh stress thì lọc ra 3 việc KEY nhất có impact lớn nhất nếu không làm.
-${buildContext()}`;
-  try {
-    const reply = await claude(sys, [...chatHistory,{role:'user',content:msg}]);
+  inp.value=''; autoResize(inp);
+  if(!getApiKey()){addMsg('ai','Anh nhập Claude API key ở trên nhé!');return;}
+  addMsg('user',msg);
+  const loadId=addLoading();
+  const sys=`Bạn là thư ký AI của anh Luan. Trả lời ngắn gọn, thực tế, tiếng Việt.
+Khi anh hỏi "làm gì giờ" → gợi ý 2-3 việc phù hợp thời điểm + lý do ngắn.
+Khi anh stress → chọn 3 việc KEY nhất có impact lớn nhất nếu bỏ qua, giải thích ngắn tại sao.
+Khi hỏi overview → tóm tắt tình hình done/còn lại, nhận xét ngắn.
+${buildCtx()}`;
+  try{
+    const reply=await claude(sys,[...chatHistory,{role:'user',content:msg}]);
     removeMsg(loadId);
-    addMsg('ai', reply);
+    addMsg('ai',reply);
     chatHistory.push({role:'user',content:msg},{role:'assistant',content:reply});
     if(chatHistory.length>24) chatHistory=chatHistory.slice(-24);
-  } catch(e){
-    removeMsg(loadId);
-    addMsg('ai','Lỗi: '+e.message);
-  }
+  }catch(e){ removeMsg(loadId); addMsg('ai','Lỗi: '+e.message); }
 }
-function quickSend(text){ document.getElementById('chatInput').value=text; sendChat(); }
-function onChatKey(e){ if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendChat(); } }
-function autoResize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,100)+'px'; }
+function quickSend(t){ document.getElementById('chatInput').value=t; sendChat(); }
+function onChatKey(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();} }
+function autoResize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,90)+'px'; }
 
-// ═══════════════════════════════════════════════════════
-// REVIEW CUỐI NGÀY
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+// REVIEW
+// ═══════════════════════════════════════════════════
 async function buildReview(){
-  const reviewEl = document.getElementById('reviewContent');
-  const active = state.tasks.filter(t=>t.status==='active');
-  const done   = state.tasks.filter(t=>t.status==='done');
-  const migrated = state.tasks.filter(t=>t.status==='migrated');
-
-  let html = `<div style="font-family:var(--serif);font-size:24px;margin-bottom:20px">Tổng kết ngày ${state.today}</div>`;
-
-  // Done section
-  html += `<div class="review-section"><h3>✅ Đã xong (${done.length})</h3><div class="review-items">${
-    done.length ? done.map(t=>`<div class="review-item"><div class="review-item-text">${t.text}</div></div>`).join('') : '<div style="color:var(--muted);font-size:13px">Chưa tick xong việc nào hôm nay</div>'
-  }</div></div>`;
-
-  // Active — need decision
+  const el=document.getElementById('reviewContent');
+  const done=S.tasks.filter(t=>t.status==='done');
+  const active=S.tasks.filter(t=>t.status==='active');
+  const today=new Date().toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
+  let html=`<div class="review-title">Tổng kết ${today}</div>`;
+  // Done
+  html+=`<div class="review-section"><h3>✅ Đã xong (${done.length})</h3>${done.length?done.map(t=>`<div class="review-item"><div class="review-item-text">${t.text}</div></div>`).join(''):'<div style="color:var(--muted);font-size:13px">Chưa tick xong việc nào</div>'}</div>`;
+  // Active
   if(active.length){
-    html += `<div class="review-section"><h3>📋 Chưa xong — cần quyết định (${active.length})</h3><div class="review-items">${
-      active.map(t=>`<div class="review-item" id="ri_${t.id}">
-        <div class="review-item-text">${t.text}${t.deadline?` <span style="font-size:10px;color:var(--blue);font-family:var(--mono)">${t.deadline}</span>`:''}${t.note?`<div style="font-size:11px;color:var(--muted)">${t.note}</div>`:''}</div>
-        <div class="review-actions">
-          <button class="raction done-mark" onclick="reviewAction('${t.id}','done')">✓ Xong</button>
-          <button class="raction migrate" onclick="reviewAction('${t.id}','migrate')">→ Kho</button>
-          <button class="raction drop" onclick="reviewAction('${t.id}','drop')">✕ Bỏ</button>
-        </div>
-      </div>`).join('')
-    }</div></div>`;
+    html+=`<div class="review-section"><h3>📋 Chưa xong — chọn hướng xử lý (${active.length})</h3>${active.map(t=>`<div class="review-item" id="ri_${t.id}"><div class="review-item-text">${t.text}${t.deadline?` <span style="font-size:10px;color:var(--blue);font-family:var(--mono)">${t.deadline}</span>`:''}</div><div class="review-actions"><button class="rac done2" onclick="reviewAct('${t.id}','done')">✓ Xong</button><button class="rac migrate" onclick="reviewAct('${t.id}','migrate')">→ Kho</button><button class="rac drop" onclick="reviewAct('${t.id}','drop')">✕ Bỏ</button></div></div>`).join('')}</div>`;
   }
-
+  html+=`<div class="review-section"><h3>🤖 Thư ký tổng kết</h3><div class="ai-summary-box" id="aiSumBox"><span style="color:var(--muted)">Đang phân tích…</span></div></div>`;
+  el.innerHTML=html;
   // AI summary
-  html += `<div class="review-section"><h3>🤖 AI tổng kết</h3><div id="aiSummarySlot" style="color:var(--muted);font-size:13px">Đang phân tích…</div></div>`;
-
-  reviewEl.innerHTML = html;
-
-  // Fetch AI summary
   if(getApiKey()){
-    const sys = `Bạn là thư ký AI. Tổng kết ngày làm việc ngắn gọn 3-5 câu tiếng Việt: đã làm được gì, chưa làm gì, nhận xét về năng suất, 1 gợi ý cho ngày mai.`;
-    try {
-      const summary = await claude(sys,[{role:'user',content:buildContext()}]);
-      document.getElementById('aiSummarySlot').textContent = summary;
-      addMsg('ai', summary);
-    } catch(e){ document.getElementById('aiSummarySlot').textContent = 'Không lấy được tổng kết.'; }
-  } else {
-    document.getElementById('aiSummarySlot').textContent = 'Cần API key.';
-  }
+    try{
+      const s=await claude(`Tổng kết ngày làm việc ngắn gọn 3-5 câu tiếng Việt theo phong cách Bullet Journal: làm được gì, chưa làm gì, nhận xét, 1 gợi ý cho ngày mai.`,[{role:'user',content:buildCtx()}]);
+      document.getElementById('aiSumBox').textContent=s;
+      addMsg('ai',s);
+    }catch(e){ document.getElementById('aiSumBox').textContent='Không lấy được tổng kết ('+e.message+')'; }
+  } else { document.getElementById('aiSumBox').textContent='Cần Claude API key.'; }
 }
 
-function reviewAction(id, action){
-  const task = state.tasks.find(t=>t.id===id);
-  if(!task) return;
-  if(action==='done') task.status='done';
+function reviewAct(id, action){
+  const t=S.tasks.find(t=>t.id===id);
+  if(!t) return;
+  if(action==='done') t.status='done';
   else if(action==='migrate'){
-    task.status='migrated';
-    state.kho.push({...task, migratedAt: state.today, status:'active'});
-  } else if(action==='drop'){
-    task.status='dropped';
+    t.status='migrated';
+    S.kho.push({...t, id:'k'+Date.now(), migratedAt:new Date().toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'}), status:'active'});
+  } else { t.status='dropped'; }
+  scheduleSave(); renderBoard(); renderKho();
+  const ri=document.getElementById('ri_'+id);
+  if(ri){
+    ri.style.opacity='.35';
+    ri.querySelectorAll('.rac').forEach(b=>{b.disabled=true;});
+    ri.querySelector('.review-actions').innerHTML=`<span style="font-size:11px;color:var(--muted)">${{done:'✓ Xong',migrate:'→ Vào Kho',drop:'✕ Bỏ'}[action]}</span>`;
   }
-  save();
-  const el = document.getElementById('ri_'+id);
-  if(el){
-    el.style.opacity='0.35';
-    const btns = el.querySelectorAll('.raction');
-    btns.forEach(b=>b.disabled=true);
-    const labels={'done':'✓ Đánh xong','migrate':'→ Đã vào Kho','drop':'✕ Bỏ qua'};
-    el.querySelector('.review-actions').innerHTML = `<span style="font-size:11px;color:var(--muted)">${labels[action]}</span>`;
-  }
-  renderBoard(); renderKho();
-  document.getElementById('statKho').textContent = state.kho.length;
 }
 
-// ═══════════════════════════════════════════════════════
-// BOARD RENDER
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+// BOARD
+// ═══════════════════════════════════════════════════
 function renderBoard(){
-  const board = document.getElementById('boardWrap');
+  const board=document.getElementById('boardWrap');
   board.innerHTML='';
-  let done=0, left=0;
+  let done=0,left=0;
   COLS.forEach(col=>{
-    const colTasks = state.tasks.filter(t=>t.col===col.id && (t.status==='active'||t.status==='done'));
-    done += colTasks.filter(t=>t.status==='done').length;
-    left += colTasks.filter(t=>t.status==='active').length;
+    const tasks=S.tasks.filter(t=>t.col===col.id&&(t.status==='active'||t.status==='done'));
+    done+=tasks.filter(t=>t.status==='done').length;
+    left+=tasks.filter(t=>t.status==='active').length;
     const colEl=document.createElement('div'); colEl.className='col';
-    colEl.innerHTML=`<div class="col-head"><div class="col-stripe" style="background:${col.color}"></div>${col.label}<span style="margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--muted)">${colTasks.length}</span></div><div class="col-tasks" id="ct_${col.id}"></div>`;
+    colEl.innerHTML=`<div class="col-head"><div class="col-stripe" style="background:${col.color}"></div>${col.label}<span style="margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--muted)">${tasks.length}</span></div><div class="col-tasks" id="ct_${col.id}"></div>`;
     board.appendChild(colEl);
-    const tasksEl=colEl.querySelector('.col-tasks');
-    if(!colTasks.length){ tasksEl.innerHTML='<div class="empty-col">—</div>'; return; }
-    colTasks.forEach(task=>{
-      const isDone=task.status==='done';
-      const card=document.createElement('div'); card.className='card'+(isDone?' done':'');
-      const dlineClass = task.deadline ? 'card-deadline' : '';
-      card.innerHTML=`<div class="card-check ${isDone?'checked':''}" onclick="toggleDone('${task.id}',event)">${isDone?'✓':''}</div>
-        <div class="card-text">${task.text}</div>
-        ${task.deadline||task.note?`<div class="card-meta">${task.deadline?`<span class="${dlineClass}">📅 ${task.deadline}</span>`:''}</div>`:''}
-        ${task.note?`<div class="card-note">${task.note}</div>`:''}`;
-      tasksEl.appendChild(card);
+    const te=colEl.querySelector('.col-tasks');
+    if(!tasks.length){te.innerHTML='<div class="empty-col">—</div>';return;}
+    tasks.forEach(t=>{
+      const d=t.status==='done';
+      const c=document.createElement('div'); c.className='card'+(d?' done':'');
+      c.innerHTML=`<div class="card-check${d?' on':''}" onclick="toggleDone('${t.id}',event)">${d?'✓':''}</div><div class="card-text">${t.text}</div>${t.deadline?`<div class="card-dl">${t.deadline}</div>`:''} ${t.note?`<div class="card-note">${t.note}</div>`:''}`;
+      te.appendChild(c);
     });
   });
-  document.getElementById('statDone').textContent=done;
-  document.getElementById('statLeft').textContent=left;
-  document.getElementById('statKho').textContent=state.kho.filter(t=>t.status==='active').length;
+  document.getElementById('sDone').textContent=done;
+  document.getElementById('sLeft').textContent=left;
+  document.getElementById('sKho').textContent=S.kho.filter(t=>t.status==='active').length;
 }
 
 function toggleDone(id,e){
   e.stopPropagation();
-  const t=state.tasks.find(t=>t.id===id);
-  if(t){ t.status=t.status==='done'?'active':'done'; save(); renderBoard(); }
+  const t=S.tasks.find(t=>t.id===id);
+  if(t){t.status=t.status==='done'?'active':'done';scheduleSave();renderBoard();}
 }
 
-// ═══════════════════════════════════════════════════════
-// KHO RENDER
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+// KHO
+// ═══════════════════════════════════════════════════
 function renderKho(){
-  const active = state.kho.filter(t=>t.status==='active');
-  document.getElementById('khoCount').textContent=`${active.length} đầu việc`;
-  const khoEl=document.getElementById('khoContent');
-  if(!active.length){ khoEl.innerHTML='<div style="color:var(--muted);font-size:13px;text-align:center;padding:40px">Kho trống — tốt lắm!</div>'; return; }
-  // Group by col
+  const active=S.kho.filter(t=>t.status==='active');
+  document.getElementById('khoCount').textContent=active.length+' đầu việc';
+  const el=document.getElementById('khoContent');
+  if(!active.length){el.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);font-size:13px">Kho trống 🎉</div>';return;}
   const grouped={};
-  COLS.forEach(c=>{ grouped[c.id]=[]; });
-  active.forEach(t=>{ if(grouped[t.col]) grouped[t.col].push(t); else grouped['other'].push(t); });
-  khoEl.innerHTML='';
+  COLS.forEach(c=>{grouped[c.id]=[];});
+  active.forEach(t=>{(grouped[t.col]||grouped['other']).push(t);});
+  el.innerHTML='';
   COLS.forEach(col=>{
     if(!grouped[col.id]?.length) return;
-    const grp=document.createElement('div'); grp.className='kho-group';
-    grp.innerHTML=`<div class="kho-group-label">${col.label}</div><div class="kho-cards">${
-      grouped[col.id].map(t=>`<div class="kho-card">
-        <div class="kho-card-text">${t.text}${t.note?`<div style="font-size:11px;color:var(--muted)">${t.note}</div>`:''}</div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
-          ${t.migratedAt?`<div class="kho-card-meta">từ ${t.migratedAt}</div>`:''}
-          ${t.deadline?`<div class="kho-card-meta" style="color:var(--blue)">📅 ${t.deadline}</div>`:''}
-          <div class="kho-card-actions">
-            <button class="kbtn" onclick="khoToDay('${t.id}')">→ Hôm nay</button>
-            <button class="kbtn del" onclick="khoRemove('${t.id}')">✕</button>
-          </div>
-        </div>
-      </div>`).join('')
-    }</div>`;
-    khoEl.appendChild(grp);
+    const g=document.createElement('div'); g.className='kho-group';
+    g.innerHTML=`<div class="kho-group-label">${col.label}</div>${grouped[col.id].map(t=>`<div class="kho-card"><div class="kho-card-body"><div>${t.text}</div>${t.note?`<div class="kho-card-note">${t.note}</div>`:''}</div><div class="kho-actions">${t.migratedAt?`<div class="kho-card-meta">từ ${t.migratedAt}</div>`:''}${t.deadline?`<div class="kho-card-meta" style="color:var(--blue)">📅 ${t.deadline}</div>`:''}<div style="display:flex;gap:5px"><button class="kbtn" onclick="khoToDay('${t.id}')">→ Hôm nay</button><button class="kbtn del" onclick="khoRemove('${t.id}')">✕</button></div></div></div>`).join('')}`;
+    el.appendChild(g);
   });
 }
 
 function khoToDay(id){
-  const idx=state.kho.findIndex(t=>t.id===id);
-  if(idx<0) return;
-  const task={...state.kho[idx], status:'active', id:'t_'+Date.now()};
-  state.tasks.push(task);
-  state.kho.splice(idx,1);
-  save(); renderBoard(); renderKho();
-  addMsg('ai',`Đã kéo "${task.text}" vào bảng hôm nay.`);
+  const i=S.kho.findIndex(t=>t.id===id);
+  if(i<0) return;
+  const t={...S.kho[i],id:'t'+Date.now(),status:'active'};
+  S.tasks.push(t); S.kho.splice(i,1);
+  scheduleSave(); renderBoard(); renderKho();
+  addMsg('ai',`Đã kéo "${t.text}" vào bảng hôm nay.`);
 }
 function khoRemove(id){
   if(!confirm('Bỏ việc này khỏi Kho?')) return;
-  state.kho=state.kho.filter(t=>t.id!==id);
-  save(); renderKho();
+  S.kho=S.kho.filter(t=>t.id!==id);
+  scheduleSave(); renderKho();
 }
 
-// ═══════════════════════════════════════════════════════
-// MODE SWITCHING
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════
+// MODES
+// ═══════════════════════════════════════════════════
 function setMode(mode){
   currentMode=mode;
   document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+mode)?.classList.add('active');
   const badges={brief:'Chào buổi sáng',daily:'Trong ngày',review:'Tổng kết',kho:'Kho việc'};
   document.getElementById('modeBadge').textContent=badges[mode]||'';
-  // Views
-  const views=['brief','daily','review','kho'];
-  views.forEach(v=>{
+  ['brief','daily','review','kho'].forEach(v=>{
     const el=document.getElementById('view-'+v);
     if(!el) return;
-    el.style.display = v===mode ? (v==='brief'?'block':'flex') : 'none';
+    const isBrief=v==='brief';
+    el.style.display=v===mode?(isBrief?'block':'flex'):'none';
   });
   if(mode==='review') buildReview();
   if(mode==='kho') renderKho();
 }
 
-// ═══════════════════════════════════════════════════════
-// CHAT UI helpers
-// ═══════════════════════════════════════════════════════
-let loadCounter=0;
+// ═══════════════════════════════════════════════════
+// CHAT UI HELPERS
+// ═══════════════════════════════════════════════════
+let lc=0;
 function addMsg(role,text){
-  const msgs=document.getElementById('chatMsgs');
   const el=document.createElement('div');
-  el.className=`msg ${role}`;
-  el.textContent=text;
-  msgs.appendChild(el);
-  msgs.scrollTop=msgs.scrollHeight;
+  el.className='msg '+role; el.textContent=text;
+  const msgs=document.getElementById('chatMsgs');
+  msgs.appendChild(el); msgs.scrollTop=msgs.scrollHeight;
   return el;
 }
 function addLoading(){
-  const id='ld'+(++loadCounter);
-  const msgs=document.getElementById('chatMsgs');
+  const id='ld'+(++lc);
   const el=document.createElement('div');
   el.className='msg ai'; el.id=id;
   el.innerHTML='<span class="loading-dot">●</span><span class="loading-dot">●</span><span class="loading-dot">●</span>';
-  msgs.appendChild(el);
-  msgs.scrollTop=msgs.scrollHeight;
+  const msgs=document.getElementById('chatMsgs');
+  msgs.appendChild(el); msgs.scrollTop=msgs.scrollHeight;
   return id;
 }
 function removeMsg(id){ document.getElementById(id)?.remove(); }
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+function renderAll(){ renderBoard(); renderKho(); }
 
-// ═══════════════════════════════════════════════════════
-// START
-// ═══════════════════════════════════════════════════════
-init();
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+function init(){
+  // Date
+  document.getElementById('dateChip').textContent=
+    new Date().toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'});
+  // API key
+  const savedKey=LS.loadApi();
+  if(savedKey) document.getElementById('apiInput').value=savedKey;
+  // Load local data as fallback
+  const local=LS.loadLocal();
+  if(local) S=local;
+  renderAll();
+  // Try reconnect Drive with saved token
+  const savedToken=LS.loadToken();
+  if(savedToken){
+    driveToken=savedToken;
+    setDriveUI(true);
+    driveInit().catch(()=>{ driveToken=null; setDriveUI(false); setSyncStatus('Drive token hết hạn — đăng nhập lại'); });
+  }
+  // Morning brief
+  morningBrief();
+}
+
+window.addEventListener('load', init);
 </script>
 </body>
 </html>
