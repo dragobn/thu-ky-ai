@@ -351,7 +351,7 @@ const LS = {
   saveToken(t){ try{localStorage.setItem('tk_gtoken',t||'');}catch(e){} },
   loadToken(){ try{return localStorage.getItem('tk_gtoken')||null;}catch(e){return null;} },
   save(){ try{localStorage.setItem('tk_data',JSON.stringify(S));}catch(e){} },
-  load(){ try{const d=localStorage.getItem('tk_data');if(d)S=JSON.parse(d);}catch(e){} },
+  load(){ try{const d=localStorage.getItem('tk_data');if(d){S=JSON.parse(d);S.plan=S.plan||[];S.kho=S.kho||[];S.preferences=S.preferences||[];}}catch(e){} },
 };
 
 // ═══════════════════════════════════════
@@ -396,7 +396,7 @@ async function driveLoad(){
   const res=await fetch(`https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media`,{headers:{Authorization:'Bearer '+driveToken}});
   if(!res.ok) return;
   const data=await res.json();
-  if(data?.tasks!==undefined) S=data;
+  if(data?.tasks!==undefined){ S=data; S.plan=S.plan||[]; S.kho=S.kho||[]; S.preferences=S.preferences||[]; }
 }
 async function driveSave(){
   setSyncTxt('⟳ Lưu…');
