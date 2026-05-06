@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thư Ký · Luan</title>
+<title>Thu Ky · Luan</title>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
@@ -15,8 +15,6 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:100vh;display:flex;flex-direction:column;}
-
-/* TOPBAR */
 .topbar{display:flex;align-items:center;gap:10px;padding:8px 16px;background:var(--paper);border-bottom:1px solid var(--border);}
 .logo{font-family:var(--serif);font-size:18px;display:flex;align-items:center;gap:7px;flex-shrink:0;}
 .logo-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);}
@@ -31,97 +29,66 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
 .drive-btn.connected{border-color:var(--green);color:var(--green);}
 .drive-dot{width:6px;height:6px;border-radius:50%;background:var(--muted);}
 .drive-dot.on{background:var(--green);}
-.sync-txt{font-size:10px;font-family:var(--mono);color:var(--muted);max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-
-/* MODES */
+.sync-txt{font-size:10px;font-family:var(--mono);color:var(--muted);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .modes{display:flex;border-bottom:1px solid var(--border);background:var(--paper);}
 .mode-btn{padding:9px 16px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.04em;text-transform:uppercase;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--font);}
 .mode-btn.active{color:var(--orange);border-bottom-color:var(--orange);}
 .mode-btn:hover:not(.active){color:var(--ink);}
-
-/* LAYOUT */
 .layout{display:flex;flex:1;overflow:hidden;height:calc(100vh - 91px);}
-
-/* CHAT PANEL */
 .chat-panel{width:320px;min-width:320px;display:flex;flex-direction:column;border-right:1px solid var(--border);background:var(--paper);}
 .chat-header{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .chat-title{font-size:13px;font-weight:600;}
 .mode-badge{font-size:10px;padding:2px 7px;border-radius:10px;font-family:var(--mono);background:var(--surface);color:var(--muted);}
 .chat-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:9px;}
-.msg{padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word;}
+.msg{padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.6;word-break:break-word;}
 .msg.ai{background:var(--warm);border:1px solid var(--border);align-self:flex-start;max-width:95%;border-bottom-left-radius:3px;}
-.msg.user{background:var(--orange);color:#fff;align-self:flex-end;max-width:88%;border-bottom-right-radius:3px;}
-.msg.sys{background:var(--surface);color:var(--muted);font-size:11px;align-self:center;text-align:center;border-radius:8px;padding:4px 10px;font-family:var(--mono);}
+.msg.user{background:var(--orange);color:#fff;align-self:flex-end;max-width:88%;border-bottom-right-radius:3px;white-space:pre-wrap;}
 .chat-foot{padding:10px 12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:7px;}
 .quick-btns{display:flex;gap:5px;flex-wrap:wrap;}
-.qbtn{font-size:11px;padding:3px 9px;border-radius:14px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .15s;font-family:var(--font);}
+.qbtn{font-size:11px;padding:3px 9px;border-radius:14px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;font-family:var(--font);}
 .qbtn:hover{border-color:var(--orange);color:var(--orange);}
 .chat-row{display:flex;gap:6px;}
 .chat-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--ink);font-family:var(--font);font-size:13px;padding:8px 11px;outline:none;resize:none;min-height:36px;max-height:90px;}
 .chat-input:focus{border-color:var(--orange);}
 .send-btn{background:var(--orange);border:none;border-radius:8px;color:#fff;width:36px;cursor:pointer;font-size:17px;flex-shrink:0;}
-.send-btn:hover{opacity:.85;}
-
-/* RIGHT */
 .right-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-
-/* ── BRIEF VIEW ── */
 .brief-outer{flex:1;display:flex;overflow:hidden;}
-
-/* Left: AI analysis */
-.brief-left{width:300px;min-width:300px;border-right:1px solid var(--border);overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:14px;}
+.brief-left{width:300px;min-width:300px;border-right:1px solid var(--border);overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:12px;}
 .brief-greeting{font-family:var(--serif);font-size:22px;line-height:1.3;}
 .brief-sub{color:var(--muted);font-size:13px;line-height:1.6;}
-.brief-section h3{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px;}
-.brief-card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.5;display:flex;gap:9px;margin-bottom:6px;}
+.brief-section h3{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:7px;}
+.brief-card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.5;display:flex;gap:9px;margin-bottom:5px;}
 .bc-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0;}
 .bc-body{flex:1;}
 .bc-reason{font-size:11px;color:var(--muted);margin-top:2px;}
 .bc-impact{font-size:11px;color:var(--red);margin-top:2px;}
 .bc-badge{font-size:10px;font-family:var(--mono);padding:1px 6px;border-radius:8px;background:#eef4fb;color:var(--blue);display:inline-block;margin-top:3px;}
-.btn-gen-plan{width:100%;background:var(--orange);color:#fff;border:none;border-radius:8px;padding:11px;font-family:var(--font);font-weight:600;font-size:13px;cursor:pointer;margin-top:4px;}
-.btn-gen-plan:hover{opacity:.88;}
-.btn-gen-plan:disabled{opacity:.4;cursor:not-allowed;}
-
-/* Right: Day plan (ordered list, draggable) */
+.btn-start{width:100%;background:var(--orange);color:#fff;border:none;border-radius:8px;padding:11px;font-family:var(--font);font-weight:600;font-size:13px;cursor:pointer;margin-top:4px;}
 .plan-panel{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 .plan-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--paper);}
 .plan-title{font-size:13px;font-weight:600;}
 .plan-hint{font-size:11px;color:var(--muted);}
-.plan-list{flex:1;overflow-y:auto;padding:12px 14px;display:flex;flex-direction:column;gap:0;}
-
-/* Ordered task rows */
-.plan-item{display:flex;align-items:flex-start;gap:10px;padding:10px 10px;border-radius:8px;cursor:grab;transition:background .15s, box-shadow .15s;position:relative;border:1px solid transparent;margin-bottom:4px;background:var(--paper);}
+.plan-list{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:4px;}
+.plan-item{display:flex;align-items:flex-start;gap:10px;padding:10px;border-radius:8px;cursor:grab;border:1px solid transparent;background:var(--paper);margin-bottom:2px;}
 .plan-item:hover{background:var(--warm);border-color:var(--border);}
-.plan-item.dragging{opacity:.45;background:var(--surface);}
+.plan-item.dragging{opacity:.4;}
 .plan-item.drag-over{border-color:var(--orange);background:var(--warm);}
-.plan-num{font-family:var(--mono);font-size:11px;color:var(--muted);width:20px;flex-shrink:0;padding-top:2px;user-select:none;}
-.plan-drag{color:var(--border);font-size:14px;flex-shrink:0;padding-top:1px;cursor:grab;user-select:none;}
-.plan-drag:hover{color:var(--muted);}
+.plan-num{font-family:var(--mono);font-size:11px;color:var(--muted);width:20px;flex-shrink:0;padding-top:2px;}
+.plan-grip{color:var(--border);font-size:14px;flex-shrink:0;padding-top:1px;cursor:grab;}
 .plan-body{flex:1;}
 .plan-text{font-size:13px;line-height:1.5;}
-.plan-text.done-text{text-decoration:line-through;opacity:.45;}
-.plan-meta{display:flex;gap:8px;margin-top:3px;flex-wrap:wrap;}
+.plan-text.done-text{text-decoration:line-through;opacity:.4;}
+.plan-meta{display:flex;gap:6px;margin-top:3px;flex-wrap:wrap;}
 .plan-tag{font-size:10px;font-family:var(--mono);padding:1px 6px;border-radius:6px;}
 .plan-why{font-size:11px;color:var(--muted);margin-top:2px;}
-.plan-check{width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px;transition:all .15s;}
+.plan-check{width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px;}
 .plan-check.on{background:var(--green);border-color:var(--green);color:#fff;}
 .plan-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);text-align:center;padding:40px;gap:10px;font-size:13px;}
 .plan-empty-icon{font-size:36px;opacity:.35;}
-
-/* time blocks */
-.time-block{font-size:10px;font-family:var(--mono);background:var(--surface);padding:1px 7px;border-radius:8px;color:var(--muted);}
-.time-block.morning{color:#b8860b;}
-.time-block.afternoon{color:var(--blue);}
-.time-block.evening{color:#6b4c9a;}
-.energy-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:2px;}
-
-/* DAILY BOARD */
 .add-bar{padding:9px 13px;border-bottom:1px solid var(--border);display:flex;gap:7px;background:var(--paper);}
 .add-input{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--ink);font-family:var(--font);font-size:13px;padding:8px 11px;outline:none;}
 .add-input:focus{border-color:var(--orange);}
 .add-btn{background:var(--ink);color:var(--bg);border:none;border-radius:8px;padding:8px 13px;font-family:var(--font);font-weight:500;font-size:13px;cursor:pointer;}
-.add-btn:hover{opacity:.8;}
 .stats-bar{display:flex;align-items:center;justify-content:space-between;padding:7px 13px;border-bottom:1px solid var(--border);background:var(--paper);}
 .stats-left{display:flex;gap:12px;}
 .stat{font-size:12px;color:var(--muted);font-family:var(--mono);}
@@ -132,18 +99,16 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
 .col-head{padding:10px 12px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border);background:var(--paper);}
 .col-stripe{width:3px;height:12px;border-radius:2px;flex-shrink:0;}
 .col-tasks{flex:1;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:6px;}
-.card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:9px 10px;font-size:12px;line-height:1.5;position:relative;transition:border-color .15s,transform .15s;}
-.card:hover{border-color:var(--orange);transform:translateY(-1px);}
+.card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:9px 10px;font-size:12px;line-height:1.5;position:relative;}
+.card:hover{border-color:var(--orange);}
 .card.done{opacity:.35;}
 .card.done .card-text{text-decoration:line-through;}
 .card-text{padding-right:22px;}
 .card-dl{font-size:10px;font-family:var(--mono);color:var(--blue);margin-top:3px;}
 .card-note{font-size:10px;color:var(--muted);margin-top:2px;}
-.card-check{position:absolute;top:7px;right:7px;width:16px;height:16px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:9px;transition:all .15s;}
+.card-check{position:absolute;top:7px;right:7px;width:16px;height:16px;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:9px;}
 .card-check.on{background:var(--green);border-color:var(--green);color:#fff;}
 .empty-col{font-size:11px;color:var(--border);text-align:center;padding:12px 6px;}
-
-/* REVIEW */
 .review-outer{flex:1;overflow-y:auto;}
 .review-wrap{padding:18px;display:flex;flex-direction:column;gap:13px;}
 .review-title{font-family:var(--serif);font-size:22px;}
@@ -157,8 +122,6 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
 .rac.migrate{border-color:var(--blue);color:var(--blue);}
 .rac.drop{border-color:var(--red);color:var(--red);}
 .rac:disabled{opacity:.35;cursor:default;}
-
-/* KHO */
 .kho-outer{flex:1;overflow-y:auto;}
 .kho-wrap{padding:18px;}
 .kho-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
@@ -174,11 +137,9 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
 .kbtn{font-size:10px;padding:3px 7px;border-radius:5px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-family:var(--font);white-space:nowrap;}
 .kbtn:hover{border-color:var(--orange);color:var(--orange);}
 .kbtn.del:hover{border-color:var(--red);color:var(--red);}
-
-/* Misc */
-.loading-dot{animation:blink 1.2s infinite;display:inline-block;}
-.loading-dot:nth-child(2){animation-delay:.2s;}
-.loading-dot:nth-child(3){animation-delay:.4s;}
+.ld{animation:blink 1.2s infinite;display:inline-block;}
+.ld:nth-child(2){animation-delay:.2s;}
+.ld:nth-child(3){animation-delay:.4s;}
 @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
@@ -189,661 +150,645 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);min-height:10
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
-  <div class="logo"><div class="logo-dot"></div>Thư Ký</div>
+  <div class="logo"><div class="logo-dot"></div>Thu Ky</div>
   <div class="topbar-mid"></div>
   <div class="date-chip" id="dateChip"></div>
   <div class="api-wrap">
     <span class="api-label">Claude</span>
-    <input class="api-input" id="apiInput" type="password" placeholder="sk-ant-..." oninput="onApiKey(this.value)">
+    <input class="api-input" id="apiInput" type="password" placeholder="sk-ant-..." oninput="LS.saveApi(this.value)">
   </div>
   <button class="drive-btn" id="driveBtn" onclick="handleDriveAuth()">
     <div class="drive-dot" id="driveDot"></div>
-    <span id="driveBtnTxt">Kết nối Drive</span>
+    <span id="driveBtnTxt">Ket noi Drive</span>
   </button>
   <span class="sync-txt" id="syncTxt"></span>
 </div>
 
-<!-- MODES -->
 <div class="modes">
-  <button class="mode-btn active" id="tab-brief" onclick="setMode('brief')">☀ Sáng</button>
-  <button class="mode-btn" id="tab-daily" onclick="setMode('daily')">📋 Hôm nay</button>
-  <button class="mode-btn" id="tab-review" onclick="setMode('review')">🌙 Tổng kết</button>
-  <button class="mode-btn" id="tab-kho" onclick="setMode('kho')">🗄 Kho việc</button>
+  <button class="mode-btn active" id="tab-brief" onclick="setMode('brief')">&#9728; Sang</button>
+  <button class="mode-btn" id="tab-daily" onclick="setMode('daily')">&#128203; Hom nay</button>
+  <button class="mode-btn" id="tab-review" onclick="setMode('review')">&#127769; Tong ket</button>
+  <button class="mode-btn" id="tab-kho" onclick="setMode('kho')">&#128452; Kho viec</button>
 </div>
 
-<!-- MAIN LAYOUT -->
 <div class="layout">
-
-  <!-- CHAT (always visible) -->
   <div class="chat-panel">
     <div class="chat-header">
-      <div class="chat-title">Thư ký AI</div>
-      <div class="mode-badge" id="modeBadge">Buổi sáng</div>
+      <div class="chat-title">Thu ky AI</div>
+      <div class="mode-badge" id="modeBadge">Buoi sang</div>
     </div>
     <div class="chat-msgs" id="chatMsgs"></div>
     <div class="chat-foot">
       <div class="quick-btns">
-        <button class="qbtn" onclick="quickSend('Giờ này anh làm gì được?')">Làm gì giờ?</button>
-        <button class="qbtn" onclick="quickSend('Stress quá, việc nào quan trọng nhất?')">Stress ơi</button>
-        <button class="qbtn" onclick="quickSend('Sắp xếp lại thứ tự cho anh')">Sắp xếp lại</button>
-        <button class="qbtn" onclick="quickSend('Tổng quan hôm nay thế nào?')">Overview</button>
+        <button class="qbtn" onclick="quickSend('Gio nay anh lam gi duoc?')">Lam gi gio?</button>
+        <button class="qbtn" onclick="quickSend('Stress qua, viec nao quan trong nhat?')">Stress oi</button>
+        <button class="qbtn" onclick="quickSend('Sap xep lai thu tu cho anh')">Sap xep lai</button>
+        <button class="qbtn" onclick="quickSend('Tong quan hom nay the nao?')">Overview</button>
       </div>
       <div class="chat-row">
-        <textarea class="chat-input" id="chatInput" placeholder="Nhắn gì cũng được…" rows="1"
+        <textarea class="chat-input" id="chatInput" placeholder="Nhan gi cung duoc..." rows="1"
           onkeydown="onChatKey(event)" oninput="autoResize(this)"></textarea>
-        <button class="send-btn" onclick="sendChat()">↑</button>
+        <button class="send-btn" onclick="sendChat()">&#8593;</button>
       </div>
     </div>
   </div>
 
-  <!-- RIGHT PANEL -->
   <div class="right-panel">
-
-    <!-- BRIEF -->
     <div id="view-brief" style="display:flex;flex:1;overflow:hidden;" class="brief-outer">
-      <!-- Analysis sidebar -->
       <div class="brief-left" id="briefLeft">
-        <div class="brief-greeting" id="briefGreeting">Chào buổi sáng, Luan.</div>
-        <div class="brief-sub" id="briefSub">Đang chuẩn bị brief…</div>
+        <div class="brief-greeting" id="briefGreeting">Chao buoi sang, Luan.</div>
+        <div class="brief-sub" id="briefSub">Dang chuan bi brief...</div>
         <div id="briefSections"></div>
       </div>
-      <!-- Day plan -->
       <div class="plan-panel">
         <div class="plan-header">
-          <div class="plan-title">📋 Thứ tự làm việc hôm nay</div>
-          <div class="plan-hint" id="planHint">Kéo thả để đổi thứ tự · Chat để điều chỉnh</div>
+          <div class="plan-title">&#128203; Thu tu lam viec hom nay</div>
+          <div class="plan-hint">Keo tha doi thu tu · Chat de dieu chinh</div>
         </div>
         <div class="plan-list" id="planList">
           <div class="plan-empty">
-            <div class="plan-empty-icon">☀</div>
-            <div>Đợi thư ký brief xong<br>sẽ tự động tạo lịch ngày cho anh</div>
+            <div class="plan-empty-icon">&#9728;</div>
+            <div>Doi thu ky brief xong se tu dong tao lich ngay</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- DAILY BOARD -->
     <div id="view-daily" style="display:none;flex:1;flex-direction:column;overflow:hidden;">
       <div class="add-bar">
-        <input class="add-input" id="addInput" placeholder="Nhập việc mới — thô cũng được, thư ký phân tích…" onkeydown="if(event.key==='Enter')addTask()">
-        <button class="add-btn" onclick="addTask()">+ Thêm</button>
+        <input class="add-input" id="addInput" placeholder="Nhap viec moi - tho cung duoc, thu ky phan tich..." onkeydown="if(event.key==='Enter')addTask()">
+        <button class="add-btn" onclick="addTask()">+ Them</button>
       </div>
       <div class="stats-bar">
         <div class="stats-left">
           <div class="stat">Xong: <span id="sDone">0</span></div>
-          <div class="stat">Còn: <span id="sLeft">0</span></div>
+          <div class="stat">Con: <span id="sLeft">0</span></div>
           <div class="stat">Kho: <span id="sKho">0</span></div>
         </div>
-        <button class="btn-eod" onclick="setMode('review')">🌙 Tổng kết ngày</button>
+        <button class="btn-eod" onclick="setMode('review')">Tong ket ngay</button>
       </div>
       <div class="board-wrap" id="boardWrap"></div>
     </div>
 
-    <!-- REVIEW -->
     <div id="view-review" class="review-outer" style="display:none;">
       <div class="review-wrap" id="reviewContent"></div>
     </div>
 
-    <!-- KHO -->
     <div id="view-kho" class="kho-outer" style="display:none;">
       <div class="kho-wrap">
         <div class="kho-header">
-          <div class="kho-title">Kho việc</div>
-          <div class="kho-count" id="khoCount">0 đầu việc</div>
+          <div class="kho-title">Kho viec</div>
+          <div class="kho-count" id="khoCount">0 dau viec</div>
         </div>
         <div id="khoContent"></div>
       </div>
     </div>
-
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════
-const GOOGLE_CLIENT_ID = '356592007545-e6poq5irp699hj93vfvkqjl7uh5mdggm.apps.googleusercontent.com';
-const DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
-const FOLDER_NAME = 'Thư Ký AI';
-const FILE_NAME   = 'secretary_data.json';
+var GOOGLE_CLIENT_ID = '356592007545-e6poq5irp699hj93vfvkqjl7uh5mdggm.apps.googleusercontent.com';
+var FOLDER_NAME = 'Thu Ky AI';
+var FILE_NAME = 'secretary_data.json';
 
-// ═══════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════
-let S = {
-  tasks: [],
-  kho: [],
-  plan: [],
-  preferences: []
-};
-function safeS(){ S.tasks=S.tasks||[]; S.plan=S.plan||[]; S.kho=S.kho||[]; S.preferences=S.preferences||[]; return S; }
-let chatHistory = [];
-let driveToken = null, driveFolderId = null, driveFileId = null;
-let syncTimer = null;
-let dragSrc = null;
+var S = { tasks:[], kho:[], plan:[], preferences:[] };
+var chatHistory = [];
+var driveToken = null, driveFolderId = null, driveFileId = null;
+var syncTimer = null, dragSrc = null;
 
-const COLS = [
-  {id:'urgent',    label:'Gấp hôm nay',       color:'#c0392b'},
-  {id:'today',     label:'Quan trọng hôm nay', color:'#ec872b'},
-  {id:'presence',  label:'Cần có mặt',         color:'#2c5f8a'},
-  {id:'important', label:'Quan trọng',         color:'#b8860b'},
-  {id:'should',    label:'Nên làm',            color:'#2d7d5f'},
-  {id:'want',      label:'Muốn làm',           color:'#6b4c9a'},
-  {id:'other',     label:'Khác',               color:'#8a8478'},
+var COLS = [
+  {id:'urgent',    label:'Gap hom nay',       color:'#c0392b'},
+  {id:'today',     label:'Quan trong hom nay', color:'#ec872b'},
+  {id:'presence',  label:'Can co mat',         color:'#2c5f8a'},
+  {id:'important', label:'Quan trong',         color:'#b8860b'},
+  {id:'should',    label:'Nen lam',            color:'#2d7d5f'},
+  {id:'want',      label:'Muon lam',           color:'#6b4c9a'},
+  {id:'other',     label:'Khac',               color:'#8a8478'}
 ];
 
-const TIME_BLOCKS = {
-  morning:   {label:'Sáng', class:'morning'},
-  afternoon: {label:'Chiều', class:'afternoon'},
-  evening:   {label:'Tối', class:'evening'},
-  anytime:   {label:'Bất kỳ', class:''},
+// ── SAFE STATE ──
+function gs() {
+  S.tasks = S.tasks || [];
+  S.kho = S.kho || [];
+  S.plan = S.plan || [];
+  S.preferences = S.preferences || [];
+  return S;
+}
+
+// ── LOCAL STORAGE ──
+var LS = {
+  saveApi: function(v){ try{ localStorage.setItem('tk_api', v); }catch(e){} },
+  loadApi: function(){ try{ return localStorage.getItem('tk_api') || ''; }catch(e){ return ''; } },
+  saveToken: function(t){ try{ localStorage.setItem('tk_gt', t || ''); }catch(e){} },
+  loadToken: function(){ try{ return localStorage.getItem('tk_gt') || null; }catch(e){ return null; } },
+  save: function(){ try{ localStorage.setItem('tk_data', JSON.stringify(gs())); }catch(e){} },
+  load: function(){
+    try{
+      var d = localStorage.getItem('tk_data');
+      if(d){ S = JSON.parse(d); gs(); }
+    }catch(e){}
+  }
 };
 
-// ═══════════════════════════════════════
-// LOCAL STORAGE
-// ═══════════════════════════════════════
-const LS = {
-  saveApi(v){ try{localStorage.setItem('tk_api',v);}catch(e){} },
-  loadApi(){ try{return localStorage.getItem('tk_api')||'';}catch(e){return '';} },
-  saveToken(t){ try{localStorage.setItem('tk_gtoken',t||'');}catch(e){} },
-  loadToken(){ try{return localStorage.getItem('tk_gtoken')||null;}catch(e){return null;} },
-  save(){ try{localStorage.setItem('tk_data',JSON.stringify(S));}catch(e){} },
-  load(){ try{const d=localStorage.getItem('tk_data');if(d){S=JSON.parse(d);S.plan=S.plan||[];S.kho=S.kho||[];S.preferences=S.preferences||[];}}catch(e){} },
-};
-
-// ═══════════════════════════════════════
-// GOOGLE DRIVE
-// ═══════════════════════════════════════
-function handleDriveAuth(){
+// ── GOOGLE DRIVE ──
+function handleDriveAuth() {
   if(driveToken){ driveDisconnect(); return; }
-  const client = google.accounts.oauth2.initTokenClient({
+  var client = google.accounts.oauth2.initTokenClient({
     client_id: GOOGLE_CLIENT_ID,
-    scope: DRIVE_SCOPE,
-    callback: async(resp)=>{
-      if(resp.error){ showToast('❌ Lỗi đăng nhập Google'); return; }
+    scope: 'https://www.googleapis.com/auth/drive.file',
+    callback: function(resp) {
+      if(resp.error){ showToast('Loi dang nhap Google'); return; }
       driveToken = resp.access_token;
       LS.saveToken(driveToken);
       setDriveUI(true);
-      showToast('✓ Đã kết nối Google Drive');
-      await driveInit();
+      showToast('Da ket noi Google Drive');
+      driveInit();
     }
   });
   client.requestAccessToken();
 }
-function driveDisconnect(){
-  driveToken=null; driveFolderId=null; driveFileId=null;
-  LS.saveToken(''); setDriveUI(false); showToast('Đã ngắt Drive');
+
+function driveDisconnect() {
+  driveToken = null; driveFolderId = null; driveFileId = null;
+  LS.saveToken(''); setDriveUI(false); showToast('Da ngat Drive');
 }
-function setDriveUI(on){
-  document.getElementById('driveDot').className='drive-dot'+(on?' on':'');
-  document.getElementById('driveBtnTxt').textContent=on?'Drive ✓':'Kết nối Drive';
-  document.getElementById('driveBtn').className='drive-btn'+(on?' connected':'');
+
+function setDriveUI(on) {
+  document.getElementById('driveDot').className = 'drive-dot' + (on ? ' on' : '');
+  document.getElementById('driveBtnTxt').textContent = on ? 'Drive v' : 'Ket noi Drive';
+  document.getElementById('driveBtn').className = 'drive-btn' + (on ? ' connected' : '');
 }
-async function driveInit(){
-  try{
-    let res=await driveReq(`https://www.googleapis.com/drive/v3/files?q=name='${FOLDER_NAME}' and mimeType='application/vnd.google-apps.folder' and trashed=false&fields=files(id)`);
-    driveFolderId = res.files?.length ? res.files[0].id : (await driveReq('https://www.googleapis.com/drive/v3/files',{method:'POST',body:JSON.stringify({name:FOLDER_NAME,mimeType:'application/vnd.google-apps.folder'})})).id;
-    res=await driveReq(`https://www.googleapis.com/drive/v3/files?q=name='${FILE_NAME}' and '${driveFolderId}' in parents and trashed=false&fields=files(id)`);
-    if(res.files?.length){ driveFileId=res.files[0].id; await driveLoad(); }
-    else { await driveSave(); }
-    renderAll(); setSyncTxt('✓ Drive đồng bộ');
-  }catch(e){ setSyncTxt('Drive lỗi'); }
+
+async function driveReq(url, opts) {
+  opts = opts || {};
+  var headers = { 'Authorization': 'Bearer ' + driveToken, 'Content-Type': 'application/json' };
+  if(opts.headers) Object.assign(headers, opts.headers);
+  var res = await fetch(url, { method: opts.method || 'GET', headers: headers, body: opts.body });
+  return res.json();
 }
-async function driveLoad(){
-  const res=await fetch(`https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media`,{headers:{Authorization:'Bearer '+driveToken}});
-  if(!res.ok) return;
-  const data=await res.json();
-  if(data?.tasks!==undefined){ S=data; S.plan=S.plan||[]; S.kho=S.kho||[]; S.preferences=S.preferences||[]; }
-}
-async function driveSave(){
-  setSyncTxt('⟳ Lưu…');
-  const body=JSON.stringify(S,null,2);
-  const blob=new Blob([body],{type:'application/json'});
-  if(!driveFileId){
-    const form=new FormData();
-    form.append('metadata',new Blob([JSON.stringify({name:FILE_NAME,parents:[driveFolderId]})],{type:'application/json'}));
-    form.append('file',blob);
-    const r=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',{method:'POST',headers:{Authorization:'Bearer '+driveToken},body:form});
-    driveFileId=(await r.json()).id;
-  } else {
-    await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`,{method:'PATCH',headers:{Authorization:'Bearer '+driveToken,'Content-Type':'application/json'},body});
+
+async function driveInit() {
+  try {
+    setSyncTxt('Dang ket noi...');
+    var res = await driveReq("https://www.googleapis.com/drive/v3/files?q=name='" + FOLDER_NAME + "' and mimeType='application/vnd.google-apps.folder' and trashed=false&fields=files(id)");
+    if(res.files && res.files.length) {
+      driveFolderId = res.files[0].id;
+    } else {
+      var f = await driveReq('https://www.googleapis.com/drive/v3/files', { method:'POST', body: JSON.stringify({name: FOLDER_NAME, mimeType:'application/vnd.google-apps.folder'}) });
+      driveFolderId = f.id;
+    }
+    res = await driveReq("https://www.googleapis.com/drive/v3/files?q=name='" + FILE_NAME + "' and '" + driveFolderId + "' in parents and trashed=false&fields=files(id)");
+    if(res.files && res.files.length) {
+      driveFileId = res.files[0].id;
+      await driveLoad();
+    } else {
+      await driveSave();
+    }
+    renderAll();
+    setSyncTxt('Drive dong bo');
+  } catch(e) {
+    setSyncTxt('Drive loi');
   }
-  setSyncTxt('✓ Lưu '+new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'}));
+}
+
+async function driveLoad() {
+  var res = await fetch('https://www.googleapis.com/drive/v3/files/' + driveFileId + '?alt=media', { headers:{ Authorization:'Bearer '+driveToken } });
+  if(!res.ok) return;
+  var data = await res.json();
+  if(data && data.tasks !== undefined) { S = data; gs(); }
+}
+
+async function driveSave() {
+  setSyncTxt('Dang luu...');
+  var body = JSON.stringify(gs());
+  var blob = new Blob([body], {type:'application/json'});
+  if(!driveFileId) {
+    var form = new FormData();
+    form.append('metadata', new Blob([JSON.stringify({name: FILE_NAME, parents:[driveFolderId]})], {type:'application/json'}));
+    form.append('file', blob);
+    var r = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', { method:'POST', headers:{Authorization:'Bearer '+driveToken}, body:form });
+    var d = await r.json();
+    driveFileId = d.id;
+  } else {
+    await fetch('https://www.googleapis.com/upload/drive/v3/files/' + driveFileId + '?uploadType=media', { method:'PATCH', headers:{Authorization:'Bearer '+driveToken,'Content-Type':'application/json'}, body:body });
+  }
+  var t = new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'});
+  setSyncTxt('Luu luc ' + t);
   LS.save();
 }
-async function driveReq(url,opts={}){
-  const r=await fetch(url,{...opts,headers:{Authorization:'Bearer '+driveToken,'Content-Type':'application/json',...(opts.headers||{})}});
-  return r.json();
+
+function scheduleSave() {
+  LS.save();
+  if(!driveToken) return;
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(driveSave, 2000);
 }
-function scheduleSave(){ LS.save(); if(!driveToken)return; clearTimeout(syncTimer); syncTimer=setTimeout(driveSave,2000); }
-function setSyncTxt(t){ document.getElementById('syncTxt').textContent=t; }
 
-// ═══════════════════════════════════════
-// CLAUDE API
-// ═══════════════════════════════════════
-function getKey(){ return (document.getElementById('apiInput').value||'').trim(); }
-function onApiKey(v){ LS.saveApi(v); }
+function setSyncTxt(t) { document.getElementById('syncTxt').textContent = t; }
 
-async function claude(system, messages, json=false){
-  const key=getKey();
-  if(!key) throw new Error('NO_KEY');
-  const res=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:3000,system,messages})
+// ── CLAUDE API ──
+function getKey() { return (document.getElementById('apiInput').value || '').trim(); }
+
+async function callClaude(system, messages, wantJson) {
+  var key = getKey();
+  if(!key) throw new Error('Chua co API key');
+  var res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({ model:'claude-sonnet-4-6', max_tokens:2000, system:system, messages:messages })
   });
-  if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||'HTTP '+res.status);}
-  const d=await res.json();
-  const text=d.content?.[0]?.text||'';
-  if(json){try{return JSON.parse(text.replace(/```json|```/g,'').trim());}catch(e){throw new Error('JSON parse lỗi');}}
+  if(!res.ok) {
+    var e = await res.json().catch(function(){ return {}; });
+    throw new Error((e.error && e.error.message) || 'HTTP ' + res.status);
+  }
+  var d = await res.json();
+  var text = (d.content && d.content[0] && d.content[0].text) || '';
+  if(wantJson) {
+    try { return JSON.parse(text.replace(/```json|```/g,'').trim()); }
+    catch(e) { throw new Error('Khong parse duoc JSON'); }
+  }
   return text;
 }
 
-function buildCtx(){
-  const now=new Date();
-  const hour=now.getHours();
-  const timeOfDay=hour<12?'buổi sáng':hour<14?'buổi trưa':hour<18?'buổi chiều':'buổi tối';
-  return `Ngày: ${now.toLocaleDateString('vi-VN',{weekday:'long',day:'2-digit',month:'2-digit',year:'numeric'})} — ${timeOfDay}
-Anh Luan: chủ Lantern Travel (inbound miền Bắc VN) và Lumi Á Đông Travel (outbound Nhật/Trung/Hàn). Làm theo Bullet Journal.
-
-CÔNG VIỆC HÔM NAY:
-${S.tasks.map(t=>`[${t.col}|${t.status}] ${t.text}${t.deadline?' deadline:'+t.deadline:''}${t.note?' — '+t.note:''}`).join('\n')||'(chưa có)'}
-
-KẾ HOẠCH NGÀY:
-${(S.plan||[]).map((p,i)=>`${i+1}. [${p.timeBlock||'anytime'}|${p.done?'xong':'còn'}] ${p.text}`).join('\n')||'(chưa có)'}
-
-KHO VIỆC:
-${(S.kho||[]).filter(t=>t.status==='active').map(t=>`[${t.col}] ${t.text}${t.deadline?' '+t.deadline:''}`).join('\n')||'(rỗng)'}
-
-SỞ THÍCH SẮP XẾP ĐÃ HỌC:
-${(S.preferences||[]).slice(-10).join('\n')||'(chưa có)'}\`;
+function buildCtx() {
+  var now = new Date();
+  var h = now.getHours();
+  var tod = h < 12 ? 'buoi sang' : h < 18 ? 'buoi chieu' : 'buoi toi';
+  var taskLines = gs().tasks.map(function(t) {
+    return '[' + t.col + '|' + t.status + '] ' + t.text + (t.deadline ? ' deadline:' + t.deadline : '') + (t.note ? ' - ' + t.note : '');
+  }).join('\n') || '(chua co)';
+  var planLines = gs().plan.map(function(p, i) {
+    return (i+1) + '. [' + (p.timeBlock||'anytime') + '|' + (p.done?'xong':'con') + '] ' + p.text;
+  }).join('\n') || '(chua co)';
+  var khoLines = gs().kho.filter(function(t){ return t.status==='active'; }).map(function(t) {
+    return '[' + t.col + '] ' + t.text + (t.deadline ? ' ' + t.deadline : '');
+  }).join('\n') || '(rong)';
+  var prefLines = gs().preferences.slice(-10).join('\n') || '(chua co)';
+  return 'Ngay: ' + now.toLocaleDateString('vi-VN', {weekday:'long', day:'2-digit', month:'2-digit', year:'numeric'}) + ' - ' + tod + '\n' +
+    'Anh Luan: chu Lantern Travel (inbound mien Bac VN) va Lumi A Dong Travel (outbound Nhat/Trung/Han). Lam theo Bullet Journal.\n\n' +
+    'CONG VIEC HOM NAY:\n' + taskLines + '\n\n' +
+    'KE HOACH NGAY:\n' + planLines + '\n\n' +
+    'KHO VIEC:\n' + khoLines + '\n\n' +
+    'SO THICH SAP XEP:\n' + prefLines;
 }
 
-
-// ═══════════════════════════════════════
-// MORNING BRIEF + DAY PLAN
-// ═══════════════════════════════════════
-async function morningBrief(){ safeS();
-  const h=new Date().getHours();
-  const g=h<12?'Chào buổi sáng':h<18?'Xin chào':h<21?'Chào buổi tối':'Chào anh';
-  document.getElementById('briefGreeting').textContent=`${g}, Luan.`;
-
-  if(!getKey()){
-    document.getElementById('briefSub').textContent='Nhập Claude API key để bắt đầu.';
-    addMsg('ai','Anh nhập Claude API key vào ô bên trên (sk-ant-...) để em brief cho anh nhé!');
+// ── MORNING BRIEF ──
+async function morningBrief() {
+  gs();
+  var h = new Date().getHours();
+  var g = h < 12 ? 'Chao buoi sang' : h < 18 ? 'Xin chao' : 'Chao buoi toi';
+  document.getElementById('briefGreeting').textContent = g + ', Luan.';
+  if(!getKey()) {
+    document.getElementById('briefSub').textContent = 'Nhap Claude API key de bat dau.';
+    addMsg('ai', 'Anh nhap Claude API key vao o ben tren (sk-ant-...) de em brief cho anh nhe!');
     return;
   }
-
-  document.getElementById('briefSub').textContent='Đang phân tích và lên lịch ngày…';
-  const loadId=addLoading();
-
-  const sys=`Bạn là thư ký AI của anh Luan. Tạo morning brief + kế hoạch ngày. Trả về JSON thuần:
-{
-  "greeting": "1 câu nhận xét tình hình ngắn gọn",
-  "summary": "2 câu tổng quan để anh bắt đầu ngày",
-  "focus": [{"text":"việc","reason":"lý do ngắn","urgency":"high|mid|low","deadline":"hoặc null"}],
-  "bottleneck": [{"text":"việc gây tắc nghẽn","impact":"hậu quả nếu bỏ"}],
-  "from_kho": [{"text":"việc từ kho nên làm hôm nay","reason":"lý do"}],
-  "day_plan": [
-    {
-      "id": "p1",
-      "text": "tên việc",
-      "timeBlock": "morning|afternoon|evening|anytime",
-      "energy": "high|mid|low",
-      "why": "lý do xếp vị trí này (ngắn)",
-      "done": false
+  document.getElementById('briefSub').textContent = 'Dang phan tich va len lich ngay...';
+  var lid = addLoading();
+  var sys = 'Ban la thu ky AI. Tao morning brief + ke hoach ngay. Tra ve JSON thuan:\n' +
+    '{"greeting":"1 cau nhan xet tinh hinh","summary":"2 cau tong quan","focus":[{"text":"viec","reason":"ly do","urgency":"high|mid|low","deadline":"hoac null"}],"bottleneck":[{"text":"viec gay tac nghen","impact":"hau qua"}],"from_kho":[{"text":"viec tu kho","reason":"ly do"}],"day_plan":[{"id":"p1","text":"ten viec","timeBlock":"morning|afternoon|evening|anytime","energy":"high|mid|low","why":"ly do xep vi tri nay","done":false}]}\n' +
+    'Quy tac lap lich: ket hop quan trong+deadline, context/dia diem, nang luong (sang=tu duy cao, chieu=operational, toi=nhe). Chi dua vao day_plan nhung viec realistic hom nay.';
+  try {
+    var r = await callClaude(sys, [{role:'user', content:buildCtx()}], true);
+    removeMsg(lid);
+    document.getElementById('briefSub').textContent = r.summary || '';
+    var sec = document.getElementById('briefSections');
+    sec.innerHTML = '';
+    if(r.focus && r.focus.length) {
+      sec.innerHTML += bSec('Cap nhat can lam hom nay', r.focus.map(function(t) {
+        return '<div class="brief-card"><div class="bc-dot" style="background:' + (t.urgency==='high'?'#c0392b':t.urgency==='mid'?'#ec872b':'#2d7d5f') + '"></div><div class="bc-body"><div>' + esc(t.text) + '</div>' + (t.reason?'<div class="bc-reason">'+esc(t.reason)+'</div>':'') + (t.deadline?'<span class="bc-badge">'+esc(t.deadline)+'</span>':'') + '</div></div>';
+      }).join(''));
     }
-  ]
-}
-
-Quy tắc lên lịch day_plan — kết hợp cả 3 yếu tố:
-1. QUAN TRỌNG/DEADLINE: việc urgent hoặc gần deadline → lên trước
-2. CONTEXT/ĐỊA ĐIỂM: nhóm việc cùng nơi/loại lại (vd: gọi điện, họp ngoài, làm máy tính)
-3. NĂNG LƯỢNG: sáng → việc cần tư duy cao; chiều → việc operational/gặp gỡ; tối → việc nhẹ/đọc
-Sở thích sắp xếp đã học từ anh cần được ưu tiên áp dụng.
-Chỉ đưa vào day_plan những việc realistic cho hôm nay (không nhồi tất cả).`;
-
-  try{
-    const r=await claude(sys,[{role:'user',content:buildCtx()}],true);
-    removeMsg(loadId);
-
-    // Brief sidebar
-    document.getElementById('briefSub').textContent=r.summary||'';
-    const sec=document.getElementById('briefSections');
-    sec.innerHTML='';
-    if(r.focus?.length) sec.innerHTML+=bSection('⚡ Cần làm hôm nay',r.focus.map(t=>`<div class="brief-card"><div class="bc-dot" style="background:${t.urgency==='high'?'#c0392b':t.urgency==='mid'?'#ec872b':'#2d7d5f'}"></div><div class="bc-body"><div>${t.text}</div>${t.reason?'<div class="bc-reason">'+t.reason+'</div>':''}${t.deadline?'<span class="bc-badge">📅 '+t.deadline+'</span>':''}</div></div>`).join(''));
-    if(r.bottleneck?.length) sec.innerHTML+=bSection('🚧 Cổ chai',r.bottleneck.map(t=>`<div class="brief-card"><div class="bc-dot" style="background:#c0392b"></div><div class="bc-body"><div>${t.text}</div>${t.impact?'<div class="bc-impact">→ '+t.impact+'</div>':''}</div></div>`).join(''));
-    if(r.from_kho?.length) sec.innerHTML+=bSection('🗄 Từ Kho',r.from_kho.map(t=>`<div class="brief-card"><div class="bc-dot" style="background:#2c5f8a"></div><div class="bc-body"><div>${t.text}</div>${t.reason?'<div class="bc-reason">'+t.reason+'</div>':''}</div></div>`).join(''));
-
-    // Day plan
-    if(r.day_plan?.length){
-      S.plan = r.day_plan;
-      scheduleSave();
-      renderPlan();
+    if(r.bottleneck && r.bottleneck.length) {
+      sec.innerHTML += bSec('Co chai can tranh', r.bottleneck.map(function(t) {
+        return '<div class="brief-card"><div class="bc-dot" style="background:#c0392b"></div><div class="bc-body"><div>' + esc(t.text) + '</div>' + (t.impact?'<div class="bc-impact">'+esc(t.impact)+'</div>':'') + '</div></div>';
+      }).join(''));
     }
-
-    addMsg('ai',(r.greeting||'Chào anh!')+'\n\n'+(r.summary||'')+'\n\nEm đã lên thứ tự làm việc bên phải cho anh. Anh kéo thả để đổi thứ tự, hoặc nhắn em nếu muốn điều chỉnh nhé!');
-    chatHistory=[{role:'user',content:buildCtx()},{role:'assistant',content:JSON.stringify(r)}];
-  }catch(e){
-    removeMsg(loadId);
-    const m=e.message==='NO_KEY'?'Anh nhập API key nhé!':'Lỗi: '+e.message;
-    document.getElementById('briefSub').textContent=m;
-    addMsg('ai',m);
+    if(r.from_kho && r.from_kho.length) {
+      sec.innerHTML += bSec('Tu Kho - nen lam hom nay', r.from_kho.map(function(t) {
+        return '<div class="brief-card"><div class="bc-dot" style="background:#2c5f8a"></div><div class="bc-body"><div>' + esc(t.text) + '</div>' + (t.reason?'<div class="bc-reason">'+esc(t.reason)+'</div>':'') + '</div></div>';
+      }).join(''));
+    }
+    sec.innerHTML += '<button class="btn-start" onclick="setMode(\'daily\')">Bat dau ngay &rarr; Mo bang cong viec</button>';
+    if(r.day_plan && r.day_plan.length) { S.plan = r.day_plan; scheduleSave(); renderPlan(); }
+    addMsg('ai', (r.greeting || 'Chao anh!') + '\n\n' + (r.summary || '') + '\n\nEm da len thu tu lam viec ben phai cho anh. Anh keo tha de doi thu tu, hoac nhan em neu muon dieu chinh nhe!');
+    chatHistory = [{role:'user', content:buildCtx()}, {role:'assistant', content:JSON.stringify(r)}];
+  } catch(e) {
+    removeMsg(lid);
+    document.getElementById('briefSub').textContent = 'Loi: ' + e.message;
+    addMsg('ai', 'Loi: ' + e.message);
   }
 }
-function bSection(title,inner){ return `<div class="brief-section"><h3>${title}</h3>${inner}</div>`; }
 
-// ═══════════════════════════════════════
-// DAY PLAN RENDER + DRAG & DROP
-// ═══════════════════════════════════════
-function renderPlan(){
-  const list=document.getElementById('planList');
-  if(!safeS().plan.length){
-    list.innerHTML='<div class="plan-empty"><div class="plan-empty-icon">☀</div><div>Đợi thư ký brief xong<br>sẽ tự động tạo lịch ngày</div></div>';
+function bSec(title, inner) { return '<div class="brief-section"><h3>' + title + '</h3>' + inner + '</div>'; }
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── PLAN RENDER + DRAG DROP ──
+function renderPlan() {
+  var list = document.getElementById('planList');
+  gs();
+  if(!S.plan.length) {
+    list.innerHTML = '<div class="plan-empty"><div class="plan-empty-icon">&#9728;</div><div>Doi thu ky brief xong se tu dong tao lich ngay</div></div>';
     return;
   }
-  list.innerHTML='';
-  safeS().plan.forEach((p,i)=>{
-    const tb=TIME_BLOCKS[p.timeBlock]||TIME_BLOCKS.anytime;
-    const energyColor=p.energy==='high'?'#c0392b':p.energy==='mid'?'#ec872b':'#2d7d5f';
-    const item=document.createElement('div');
-    item.className='plan-item';
-    item.draggable=true;
-    item.dataset.idx=i;
-    item.innerHTML=`
-      <div class="plan-num">${i+1}</div>
-      <div class="plan-drag" title="Kéo để đổi thứ tự">⠿</div>
-      <div class="plan-body">
-        <div class="plan-text${p.done?' done-text':''}">${p.text}</div>
-        <div class="plan-meta">
-          ${tb.label!=='Bất kỳ'?`<span class="plan-tag time-block ${tb.class}">${tb.label}</span>`:''}
-          <span class="plan-tag" style="background:${energyColor}18;color:${energyColor}"><span class="energy-dot" style="background:${energyColor}"></span>${p.energy==='high'?'Cao':p.energy==='mid'?'Vừa':'Nhẹ'}</span>
-        </div>
-        ${p.why?`<div class="plan-why">${p.why}</div>`:''}
-      </div>
-      <div class="plan-check${p.done?' on':''}" onclick="togglePlanDone(${i},event)">${p.done?'✓':''}</div>`;
-
-    // Drag events
-    item.addEventListener('dragstart',e=>{ dragSrc=i; item.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; });
-    item.addEventListener('dragend',()=>{ item.classList.remove('dragging'); document.querySelectorAll('.plan-item').forEach(el=>el.classList.remove('drag-over')); });
-    item.addEventListener('dragover',e=>{ e.preventDefault(); item.classList.add('drag-over'); });
-    item.addEventListener('dragleave',()=>item.classList.remove('drag-over'));
-    item.addEventListener('drop',e=>{ e.preventDefault(); item.classList.remove('drag-over'); if(dragSrc===null||dragSrc===i)return; const moved=S.plan.splice(dragSrc,1)[0]; S.plan.splice(i,0,moved); dragSrc=null; scheduleSave(); renderPlan(); showToast('Đã đổi thứ tự'); });
-
-    list.appendChild(item);
+  list.innerHTML = '';
+  S.plan.forEach(function(p, i) {
+    var eColor = p.energy==='high' ? '#c0392b' : p.energy==='mid' ? '#ec872b' : '#2d7d5f';
+    var tbLabel = p.timeBlock==='morning' ? 'Sang' : p.timeBlock==='afternoon' ? 'Chieu' : p.timeBlock==='evening' ? 'Toi' : '';
+    var el = document.createElement('div');
+    el.className = 'plan-item';
+    el.draggable = true;
+    el.dataset.idx = i;
+    el.innerHTML =
+      '<div class="plan-num">' + (i+1) + '</div>' +
+      '<div class="plan-grip">&#8942;</div>' +
+      '<div class="plan-body">' +
+        '<div class="plan-text' + (p.done ? ' done-text' : '') + '">' + esc(p.text) + '</div>' +
+        '<div class="plan-meta">' +
+          (tbLabel ? '<span class="plan-tag" style="background:#f0e8d8;color:var(--muted)">' + tbLabel + '</span>' : '') +
+          '<span class="plan-tag" style="background:' + eColor + '18;color:' + eColor + '">' + (p.energy==='high'?'Cao':p.energy==='mid'?'Vua':'Nhe') + '</span>' +
+        '</div>' +
+        (p.why ? '<div class="plan-why">' + esc(p.why) + '</div>' : '') +
+      '</div>' +
+      '<div class="plan-check' + (p.done ? ' on' : '') + '" onclick="togglePlanDone(' + i + ',event)">' + (p.done ? '&#10003;' : '') + '</div>';
+    el.addEventListener('dragstart', function(e) { dragSrc = i; el.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; });
+    el.addEventListener('dragend', function() { el.classList.remove('dragging'); document.querySelectorAll('.plan-item').forEach(function(x){ x.classList.remove('drag-over'); }); });
+    el.addEventListener('dragover', function(e) { e.preventDefault(); el.classList.add('drag-over'); });
+    el.addEventListener('dragleave', function() { el.classList.remove('drag-over'); });
+    el.addEventListener('drop', function(e) {
+      e.preventDefault(); el.classList.remove('drag-over');
+      if(dragSrc === null || dragSrc === i) return;
+      var moved = S.plan.splice(dragSrc, 1)[0];
+      S.plan.splice(i, 0, moved);
+      dragSrc = null; scheduleSave(); renderPlan(); showToast('Da doi thu tu');
+    });
+    list.appendChild(el);
   });
 }
 
-function togglePlanDone(i,e){
+function togglePlanDone(i, e) {
   e.stopPropagation();
-  if(S.plan[i]) S.plan[i].done=!S.plan[i].done;
+  gs();
+  if(S.plan[i]) { S.plan[i].done = !S.plan[i].done; }
   scheduleSave(); renderPlan();
-  // sync with task board too
-  const planText=S.plan[i]?.text;
-  const task=S.tasks.find(t=>t.text===planText);
-  if(task){ task.status=S.plan[i].done?'done':'active'; renderBoard(); }
+  var pt = S.plan[i] ? S.plan[i].text : null;
+  if(pt) {
+    var t = S.tasks.find(function(x){ return x.text === pt; });
+    if(t) { t.status = S.plan[i].done ? 'done' : 'active'; renderBoard(); }
+  }
 }
 
-// ═══════════════════════════════════════
-// ADD TASK (in daily view)
-// ═══════════════════════════════════════
-async function addTask(){
-  const inp=document.getElementById('addInput');
-  const raw=inp.value.trim();
+// ── ADD TASK ──
+async function addTask() {
+  var inp = document.getElementById('addInput');
+  var raw = inp.value.trim();
   if(!raw) return;
-  inp.value='';
-  if(!getKey()){addMsg('ai','Anh nhập Claude API key nhé!');return;}
-  addMsg('user',raw);
-  const loadId=addLoading();
-  const sys=`Bạn là thư ký AI. Phân tích input, trả về JSON thuần:
-{"tasks":[{"id":"t${Date.now()}","text":"tên việc ngắn gọn","col":"urgent|today|presence|important|should|want|other","deadline":"text tự nhiên hoặc null","note":"hoặc null","status":"active"}],"plan_additions":[{"id":"p${Date.now()}","text":"tên việc","timeBlock":"morning|afternoon|evening|anytime","energy":"high|mid|low","why":"lý do ngắn","done":false}],"clarify":"câu hỏi làm rõ hoặc null","reply":"phản hồi ngắn"}
-Nếu nhiều việc thì tách ra. plan_additions là việc nên thêm vào day plan hôm nay (chỉ nếu urgent/today, bỏ qua nếu không liên quan hôm nay).`;
-  try{
-    const r=await claude(sys,[{role:'user',content:'Context:\n'+buildCtx()+'\n\nInput mới: '+raw}],true);
-    removeMsg(loadId);
-    r.tasks?.forEach(t=>S.tasks.push(t));
-    r.plan_additions?.forEach(p=>{ if(!S.plan.find(x=>x.text===p.text)) S.plan.push(p); });
+  inp.value = '';
+  if(!getKey()) { addMsg('ai','Anh nhap API key truoc nhe!'); return; }
+  addMsg('user', raw);
+  var lid = addLoading();
+  var sys = 'Ban la thu ky AI. Phan tich input, tra ve JSON thuan:\n{"tasks":[{"id":"t' + Date.now() + '","text":"ten viec ngan gon","col":"urgent|today|presence|important|should|want|other","deadline":null,"note":null,"status":"active"}],"plan_add":[{"id":"p' + Date.now() + '","text":"ten viec","timeBlock":"morning|afternoon|evening|anytime","energy":"high|mid|low","why":"ly do ngan","done":false}],"reply":"phan hoi ngan"}\nNeu nhieu viec thi tach ra. plan_add chi cho viec urgent/today hom nay.';
+  try {
+    var r = await callClaude(sys, [{role:'user', content:'Context:\n' + buildCtx() + '\n\nInput moi: ' + raw}], true);
+    removeMsg(lid);
+    if(r.tasks) r.tasks.forEach(function(t){ gs().tasks.push(t); });
+    if(r.plan_add) r.plan_add.forEach(function(p){ if(!gs().plan.find(function(x){ return x.text===p.text; })) S.plan.push(p); });
     scheduleSave(); renderBoard(); renderPlan();
-    addMsg('ai',r.reply+(r.clarify?'\n\n'+r.clarify:''));
-    chatHistory.push({role:'user',content:raw},{role:'assistant',content:JSON.stringify(r)});
-  }catch(e){ removeMsg(loadId); addMsg('ai','Lỗi: '+e.message); }
+    addMsg('ai', r.reply || 'Da them vao board.');
+    chatHistory.push({role:'user', content:raw}, {role:'assistant', content:JSON.stringify(r)});
+  } catch(e) { removeMsg(lid); addMsg('ai', 'Loi: ' + e.message); }
 }
 
-// ═══════════════════════════════════════
-// CHAT
-// ═══════════════════════════════════════
-async function sendChat(){
-  const inp=document.getElementById('chatInput');
-  const msg=inp.value.trim();
+// ── CHAT ──
+async function sendChat() {
+  var inp = document.getElementById('chatInput');
+  var msg = inp.value.trim();
   if(!msg) return;
-  inp.value=''; autoResize(inp);
-  if(!getKey()){addMsg('ai','Anh nhập API key nhé!');return;}
-  addMsg('user',msg);
-  const loadId=addLoading();
-
-  const sys=`Bạn là thư ký AI của anh Luan. Trả lời ngắn gọn, thực tế, tiếng Việt.
-
-H�ỚNG DẪN XỬ LÝ:
-- "làm gì giờ" → gợi ý 2-3 việc phù hợp thời điểm + lý do
-- "stress" → chọn 3 việc KEY nhất có impact lớn nhất nếu bỏ qua
-- "sắp xếp lại" hoặc yêu cầu đổi thứ tự → trả về JSON có key "reorder" là mảng id mới, kèm giải thích
-- học hỏi sở thích: nếu anh nói "tôi hay làm X trước Y" hay "buổi sáng tôi không muốn họp" → ghi nhận vào "new_preference"
-
-Nếu cần reorder hoặc ghi nhận preference, trả về JSON:
-{"reply":"...", "reorder":["p1","p2",...] hoặc null, "new_preference":"sở thích mới học được hoặc null"}
-Nếu chỉ chat thường, trả về text bình thường.
-
-${buildCtx()}`;
-
-  try{
-    const raw=await claude(sys,[...chatHistory,{role:'user',content:msg}]);
-    removeMsg(loadId);
-
-    // Try parse JSON response
-    let reply=raw;
-    try{
-      const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
-      reply=parsed.reply||raw;
-      // Apply reorder
-      if(parsed.reorder?.length){
-        const newPlan=[];
-        parsed.reorder.forEach(id=>{ const p=S.plan.find(x=>x.id===id); if(p) newPlan.push(p); });
-        // Add any not in reorder list at end
-        safeS().plan.forEach(p=>{ if(!newPlan.find(x=>x.id===p.id)) newPlan.push(p); });
-        S.plan=newPlan;
-        renderPlan();
-        reply+=' ✓ Đã sắp xếp lại thứ tự.';
+  inp.value = ''; autoResize(inp);
+  if(!getKey()) { addMsg('ai','Anh nhap API key truoc nhe!'); return; }
+  addMsg('user', msg);
+  var lid = addLoading();
+  var sys = 'Ban la thu ky AI cua anh Luan. Tra loi ngan gon, thuc te, tieng Viet.\n' +
+    'Khi anh hoi "lam gi gio" -> goi y 2-3 viec phu hop thoi diem.\n' +
+    'Khi anh stress -> chon 3 viec KEY nhat co impact lon nhat neu bo qua.\n' +
+    'Khi anh muon sap xep lai -> tra ve JSON: {"reply":"...","reorder":["id1","id2",...],"new_pref":"so thich moi hoac null"}\n' +
+    'Neu chi chat thuong -> tra ve text binh thuong.\n\n' + buildCtx();
+  try {
+    var raw = await callClaude(sys, chatHistory.concat([{role:'user', content:msg}]), false);
+    removeMsg(lid);
+    var reply = raw;
+    try {
+      var parsed = JSON.parse(raw.replace(/```json|```/g,'').trim());
+      reply = parsed.reply || raw;
+      if(parsed.reorder && parsed.reorder.length) {
+        var newPlan = [];
+        parsed.reorder.forEach(function(id){ var p = gs().plan.find(function(x){ return x.id===id; }); if(p) newPlan.push(p); });
+        gs().plan.forEach(function(p){ if(!newPlan.find(function(x){ return x.id===p.id; })) newPlan.push(p); });
+        S.plan = newPlan; renderPlan();
       }
-      // Learn preference
-      if(parsed.new_preference){
-        S.preferences.push(parsed.new_preference);
-        if(S.preferences.length>30) S.preferences=S.preferences.slice(-30);
-        reply+=' [Em đã ghi nhận sở thích này để áp dụng cho những lần sau]';
+      if(parsed.new_pref) {
+        gs().preferences.push(parsed.new_pref);
+        if(S.preferences.length > 30) S.preferences = S.preferences.slice(-30);
       }
       scheduleSave();
-    }catch(e){ /* plain text reply, fine */ }
-
-    addMsg('ai',reply);
-    chatHistory.push({role:'user',content:msg},{role:'assistant',content:raw});
-    if(chatHistory.length>24) chatHistory=chatHistory.slice(-24);
-  }catch(e){ removeMsg(loadId); addMsg('ai','Lỗi: '+e.message); }
+    } catch(e) { /* plain text */ }
+    addMsg('ai', reply);
+    chatHistory.push({role:'user', content:msg}, {role:'assistant', content:raw});
+    if(chatHistory.length > 24) chatHistory = chatHistory.slice(-24);
+  } catch(e) { removeMsg(lid); addMsg('ai', 'Loi: ' + e.message); }
 }
 
-function quickSend(t){ document.getElementById('chatInput').value=t; sendChat(); }
-function onChatKey(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();} }
-function autoResize(el){ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,90)+'px'; }
+function quickSend(t) { document.getElementById('chatInput').value = t; sendChat(); }
+function onChatKey(e) { if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendChat(); } }
+function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,90)+'px'; }
 
-// ═══════════════════════════════════════
-// BOARD RENDER
-// ═══════════════════════════════════════
-function renderBoard(){
-  const board=document.getElementById('boardWrap');
-  board.innerHTML='';
-  let done=0,left=0;
-  COLS.forEach(col=>{
-    const tasks=S.tasks.filter(t=>t.col===col.id&&(t.status==='active'||t.status==='done'));
-    done+=tasks.filter(t=>t.status==='done').length;
-    left+=tasks.filter(t=>t.status==='active').length;
-    const colEl=document.createElement('div'); colEl.className='col';
-    colEl.innerHTML=`<div class="col-head"><div class="col-stripe" style="background:${col.color}"></div>${col.label}<span style="margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--muted)">${tasks.length}</span></div><div class="col-tasks" id="ct_${col.id}"></div>`;
+// ── BOARD ──
+function renderBoard() {
+  var board = document.getElementById('boardWrap');
+  board.innerHTML = '';
+  var done = 0, left = 0;
+  gs();
+  COLS.forEach(function(col) {
+    var tasks = S.tasks.filter(function(t){ return t.col===col.id && (t.status==='active'||t.status==='done'); });
+    done += tasks.filter(function(t){ return t.status==='done'; }).length;
+    left += tasks.filter(function(t){ return t.status==='active'; }).length;
+    var colEl = document.createElement('div'); colEl.className = 'col';
+    colEl.innerHTML = '<div class="col-head"><div class="col-stripe" style="background:'+col.color+'"></div>'+col.label+'<span style="margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--muted)">'+tasks.length+'</span></div><div class="col-tasks" id="ct_'+col.id+'"></div>';
     board.appendChild(colEl);
-    const te=colEl.querySelector('.col-tasks');
-    if(!tasks.length){te.innerHTML='<div class="empty-col">—</div>';return;}
-    tasks.forEach(t=>{
-      const d=t.status==='done';
-      const c=document.createElement('div'); c.className='card'+(d?' done':'');
-      c.innerHTML=`<div class="card-check${d?' on':''}" onclick="toggleDone('${t.id}',event)">${d?'✓':''}</div><div class="card-text">${t.text}</div>${t.deadline?`<div class="card-dl">${t.deadline}</div>`:''}${t.note?`<div class="card-note">${t.note}</div>`:''}`;
+    var te = colEl.querySelector('.col-tasks');
+    if(!tasks.length){ te.innerHTML = '<div class="empty-col">-</div>'; return; }
+    tasks.forEach(function(t) {
+      var d = t.status==='done';
+      var c = document.createElement('div'); c.className = 'card' + (d?' done':'');
+      c.innerHTML = '<div class="card-check' + (d?' on':'') + '" onclick="toggleDone(\''+t.id+'\',event)">'+(d?'&#10003;':'')+'</div><div class="card-text">'+esc(t.text)+'</div>'+(t.deadline?'<div class="card-dl">'+esc(t.deadline)+'</div>':'')+(t.note?'<div class="card-note">'+esc(t.note)+'</div>':'');
       te.appendChild(c);
     });
   });
-  document.getElementById('sDone').textContent=done;
-  document.getElementById('sLeft').textContent=left;
-  document.getElementById('sKho').textContent=S.kho.filter(t=>t.status==='active').length;
+  document.getElementById('sDone').textContent = done;
+  document.getElementById('sLeft').textContent = left;
+  document.getElementById('sKho').textContent = gs().kho.filter(function(t){ return t.status==='active'; }).length;
 }
 
-function toggleDone(id,e){
+function toggleDone(id, e) {
   e.stopPropagation();
-  const t=S.tasks.find(t=>t.id===id);
-  if(t){
-    t.status=t.status==='done'?'active':'done';
-    // sync plan
-    const pi=S.plan.findIndex(p=>p.text===t.text);
-    if(pi>=0) S.plan[pi].done=(t.status==='done');
+  gs();
+  var t = S.tasks.find(function(x){ return x.id===id; });
+  if(t) {
+    t.status = t.status==='done' ? 'active' : 'done';
+    var pi = S.plan.findIndex(function(p){ return p.text===t.text; });
+    if(pi >= 0) S.plan[pi].done = (t.status==='done');
     scheduleSave(); renderBoard(); renderPlan();
   }
 }
 
-// ═══════════════════════════════════════
-// REVIEW
-// ═══════════════════════════════════════
-async function buildReview(){ safeS();
-  const el=document.getElementById('reviewContent');
-  const done=S.tasks.filter(t=>t.status==='done');
-  const active=S.tasks.filter(t=>t.status==='active');
-  const today=new Date().toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'});
-  let html=`<div class="review-title">Tổng kết ${today}</div>`;
-  html+=`<div class="review-section"><h3>✅ Đã xong (${done.length})</h3>${done.length?done.map(t=>`<div class="review-item"><div class="review-item-text">${t.text}</div></div>`).join(''):'<div style="color:var(--muted);font-size:13px">Chưa tick xong việc nào</div>'}</div>`;
-  if(active.length) html+=`<div class="review-section"><h3>📋 Chưa xong — chọn hướng (${active.length})</h3>${active.map(t=>`<div class="review-item" id="ri_${t.id}"><div class="review-item-text">${t.text}${t.deadline?` <span style="font-size:10px;color:var(--blue);font-family:var(--mono)">${t.deadline}</span>`:''}</div><div class="review-actions"><button class="rac done2" onclick="reviewAct('${t.id}','done')">✓ Xong</button><button class="rac migrate" onclick="reviewAct('${t.id}','migrate')">→ Kho</button><button class="rac drop" onclick="reviewAct('${t.id}','drop')">✕ Bỏ</button></div></div>`).join('')}</div>`;
-  html+=`<div class="review-section"><h3>🤖 Thư ký tổng kết</h3><div id="aiSumBox" style="font-size:13px;line-height:1.7;color:var(--muted)">Đang phân tích…</div></div>`;
-  el.innerHTML=html;
-  if(getKey()){
-    try{
-      const s=await claude('Tổng kết ngày làm việc ngắn gọn 3-5 câu tiếng Việt theo Bullet Journal: làm được gì, chưa làm gì, nhận xét, 1 gợi ý cho ngày mai.',[{role:'user',content:buildCtx()}]);
-      document.getElementById('aiSumBox').textContent=s;
-      document.getElementById('aiSumBox').style.color='var(--ink)';
-      addMsg('ai',s);
-    }catch(e){ document.getElementById('aiSumBox').textContent='Lỗi: '+e.message; }
+// ── REVIEW ──
+async function buildReview() {
+  gs();
+  var el = document.getElementById('reviewContent');
+  var done = S.tasks.filter(function(t){ return t.status==='done'; });
+  var active = S.tasks.filter(function(t){ return t.status==='active'; });
+  var today = new Date().toLocaleDateString('vi-VN', {day:'2-digit', month:'2-digit', year:'numeric'});
+  var html = '<div class="review-title">Tong ket ' + today + '</div>';
+  html += '<div class="review-section"><h3>Da xong (' + done.length + ')</h3>' + (done.length ? done.map(function(t){ return '<div class="review-item"><div class="review-item-text">'+esc(t.text)+'</div></div>'; }).join('') : '<div style="color:var(--muted);font-size:13px">Chua tick xong viec nao</div>') + '</div>';
+  if(active.length) {
+    html += '<div class="review-section"><h3>Chua xong - chon huong (' + active.length + ')</h3>' +
+      active.map(function(t){ return '<div class="review-item" id="ri_'+t.id+'"><div class="review-item-text">'+esc(t.text)+(t.deadline?' <span style="font-size:10px;color:var(--blue);font-family:var(--mono)">'+esc(t.deadline)+'</span>':'')+'</div><div class="review-actions"><button class="rac done2" onclick="reviewAct(\''+t.id+'\',\'done\')">Xong</button><button class="rac migrate" onclick="reviewAct(\''+t.id+'\',\'migrate\')">&rarr; Kho</button><button class="rac drop" onclick="reviewAct(\''+t.id+'\',\'drop\')">Bo</button></div></div>'; }).join('') +
+      '</div>';
+  }
+  html += '<div class="review-section"><h3>Thu ky tong ket</h3><div id="aiSumBox" style="font-size:13px;line-height:1.7;color:var(--muted)">Dang phan tich...</div></div>';
+  el.innerHTML = html;
+  if(getKey()) {
+    try {
+      var s = await callClaude('Tong ket ngay lam viec ngan gon 3-5 cau tieng Viet theo Bullet Journal: lam duoc gi, chua lam gi, nhan xet, 1 goi y cho ngay mai.', [{role:'user', content:buildCtx()}], false);
+      document.getElementById('aiSumBox').textContent = s;
+      document.getElementById('aiSumBox').style.color = 'var(--ink)';
+      addMsg('ai', s);
+    } catch(e) { document.getElementById('aiSumBox').textContent = 'Loi: ' + e.message; }
   }
 }
 
-function reviewAct(id,action){
-  const t=S.tasks.find(t=>t.id===id); if(!t) return;
-  if(action==='done') t.status='done';
-  else if(action==='migrate'){ t.status='migrated'; S.kho.push({...t,id:'k'+Date.now(),migratedAt:new Date().toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'}),status:'active'}); }
-  else t.status='dropped';
-  // remove from plan
-  S.plan=S.plan.filter(p=>p.text!==t.text);
+function reviewAct(id, action) {
+  gs();
+  var t = S.tasks.find(function(x){ return x.id===id; });
+  if(!t) return;
+  if(action==='done') t.status = 'done';
+  else if(action==='migrate') { t.status = 'migrated'; S.kho.push(Object.assign({}, t, {id:'k'+Date.now(), migratedAt:new Date().toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'}), status:'active'})); }
+  else t.status = 'dropped';
+  S.plan = S.plan.filter(function(p){ return p.text !== t.text; });
   scheduleSave(); renderBoard(); renderPlan(); renderKho();
-  const ri=document.getElementById('ri_'+id);
-  if(ri){ ri.style.opacity='.35'; ri.querySelectorAll('.rac').forEach(b=>b.disabled=true); ri.querySelector('.review-actions').innerHTML=`<span style="font-size:11px;color:var(--muted)">${{done:'✓ Xong',migrate:'→ Kho',drop:'✕ Bỏ'}[action]}</span>`; }
+  var ri = document.getElementById('ri_' + id);
+  if(ri) {
+    ri.style.opacity = '.35';
+    ri.querySelectorAll('.rac').forEach(function(b){ b.disabled = true; });
+    ri.querySelector('.review-actions').innerHTML = '<span style="font-size:11px;color:var(--muted)">' + {done:'Xong', migrate:'Vao Kho', drop:'Bo'}[action] + '</span>';
+  }
 }
 
-// ═══════════════════════════════════════
-// KHO
-// ═══════════════════════════════════════
-function renderKho(){
-  const active=S.kho.filter(t=>t.status==='active');
-  document.getElementById('khoCount').textContent=active.length+' đầu việc';
-  const el=document.getElementById('khoContent');
-  if(!active.length){el.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);font-size:13px">Kho trống 🎉</div>';return;}
-  const grouped={};
-  COLS.forEach(c=>{grouped[c.id]=[];});
-  active.forEach(t=>{(grouped[t.col]||grouped['other']).push(t);});
-  el.innerHTML='';
-  COLS.forEach(col=>{
-    if(!grouped[col.id]?.length) return;
-    const g=document.createElement('div'); g.className='kho-group';
-    g.innerHTML=`<div class="kho-group-label">${col.label}</div>${grouped[col.id].map(t=>`<div class="kho-card"><div class="kho-card-body"><div>${t.text}</div>${t.note?'<div class="kho-card-note">'+t.note+'</div>':''}</div><div class="kho-actions">${t.migratedAt?'<div class="kho-meta">từ '+t.migratedAt+'</div>':''}${t.deadline?'<div class="kho-meta" style="color:var(--blue)">📅 '+t.deadline+'</div>':''}<div style="display:flex;gap:4px"><button class="kbtn" onclick="khoToDay(\''+t.id+'\')">→ Hôm nay</button><button class="kbtn del" onclick="khoRemove(\''+t.id+'\')">✕</button></div></div></div>`).join('')}`;
+// ── KHO ──
+function renderKho() {
+  gs();
+  var active = S.kho.filter(function(t){ return t.status==='active'; });
+  document.getElementById('khoCount').textContent = active.length + ' dau viec';
+  var el = document.getElementById('khoContent');
+  if(!active.length) { el.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);font-size:13px">Kho trong</div>'; return; }
+  var grouped = {};
+  COLS.forEach(function(c){ grouped[c.id] = []; });
+  active.forEach(function(t){ (grouped[t.col] || grouped['other']).push(t); });
+  el.innerHTML = '';
+  COLS.forEach(function(col) {
+    if(!grouped[col.id] || !grouped[col.id].length) return;
+    var g = document.createElement('div'); g.className = 'kho-group';
+    g.innerHTML = '<div class="kho-group-label">' + col.label + '</div>' +
+      grouped[col.id].map(function(t) {
+        return '<div class="kho-card"><div class="kho-card-body"><div>'+esc(t.text)+'</div>'+(t.note?'<div class="kho-card-note">'+esc(t.note)+'</div>':'')+'</div><div class="kho-actions">'+(t.migratedAt?'<div class="kho-meta">tu '+esc(t.migratedAt)+'</div>':'')+(t.deadline?'<div class="kho-meta" style="color:var(--blue)">'+esc(t.deadline)+'</div>':'')+'<div style="display:flex;gap:4px"><button class="kbtn" onclick="khoToDay(\''+t.id+'\')">Hom nay</button><button class="kbtn del" onclick="khoRemove(\''+t.id+'\')">X</button></div></div></div>';
+      }).join('');
     el.appendChild(g);
   });
 }
 
-function khoToDay(id){
-  const i=S.kho.findIndex(t=>t.id===id); if(i<0) return;
-  const t={...S.kho[i],id:'t'+Date.now(),status:'active'};
-  S.tasks.push(t); S.kho.splice(i,1);
+function khoToDay(id) {
+  gs();
+  var i = S.kho.findIndex(function(t){ return t.id===id; });
+  if(i < 0) return;
+  var t = Object.assign({}, S.kho[i], {id:'t'+Date.now(), status:'active'});
+  S.tasks.push(t); S.kho.splice(i, 1);
   scheduleSave(); renderBoard(); renderKho();
-  addMsg('ai',`Đã kéo "${t.text}" vào bảng hôm nay.`);
+  addMsg('ai', 'Da keo "' + t.text + '" vao bang hom nay.');
 }
-function khoRemove(id){
-  if(!confirm('Bỏ việc này khỏi Kho?')) return;
-  S.kho=S.kho.filter(t=>t.id!==id);
+
+function khoRemove(id) {
+  if(!confirm('Bo viec nay khoi Kho?')) return;
+  gs();
+  S.kho = S.kho.filter(function(t){ return t.id!==id; });
   scheduleSave(); renderKho();
 }
 
-// ═══════════════════════════════════════
-// MODE
-// ═══════════════════════════════════════
-function setMode(mode){
-  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+mode)?.classList.add('active');
-  document.getElementById('modeBadge').textContent={brief:'Buổi sáng',daily:'Trong ngày',review:'Tổng kết',kho:'Kho việc'}[mode]||'';
-  ['brief','daily','review','kho'].forEach(v=>{
-    const el=document.getElementById('view-'+v); if(!el) return;
-    el.style.display=v===mode?(v==='brief'?'flex':'flex'):'none';
-    if(v!=='brief') el.style.flexDirection=v==='daily'?'column':'column';
+// ── MODE ──
+function setMode(mode) {
+  document.querySelectorAll('.mode-btn').forEach(function(b){ b.classList.remove('active'); });
+  var tabEl = document.getElementById('tab-' + mode);
+  if(tabEl) tabEl.classList.add('active');
+  var badges = {brief:'Buoi sang', daily:'Trong ngay', review:'Tong ket', kho:'Kho viec'};
+  document.getElementById('modeBadge').textContent = badges[mode] || '';
+  var views = ['brief','daily','review','kho'];
+  views.forEach(function(v) {
+    var el = document.getElementById('view-' + v);
+    if(!el) return;
+    if(v === mode) { el.style.display = (v==='brief') ? 'flex' : 'flex'; el.style.flexDirection = (v==='daily'||v==='brief') ? '' : 'column'; }
+    else { el.style.display = 'none'; }
   });
   if(mode==='review') buildReview();
   if(mode==='kho') renderKho();
 }
 
-// ═══════════════════════════════════════
-// CHAT HELPERS
-// ═══════════════════════════════════════
-let lc=0;
-function renderMd(text){
-  var s = (text||'').replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-  s = s.replace(/\n/g,"<br>");
-  return s;
+// ── CHAT HELPERS ──
+var lc = 0;
+function addMsg(role, text) {
+  var el = document.createElement('div');
+  el.className = 'msg ' + role;
+  el.textContent = text;
+  var msgs = document.getElementById('chatMsgs');
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
 }
-function addMsg(role,text){
-  const el=document.createElement('div'); el.className='msg '+role;
-  if(role==='ai') el.innerHTML=renderMd(text);
-  else el.textContent=text;
-  const msgs=document.getElementById('chatMsgs');
-  msgs.appendChild(el); msgs.scrollTop=msgs.scrollHeight; return el;
+function addLoading() {
+  var id = 'ld' + (++lc);
+  var el = document.createElement('div');
+  el.className = 'msg ai'; el.id = id;
+  el.innerHTML = '<span class="ld">&#9679;</span><span class="ld">&#9679;</span><span class="ld">&#9679;</span>';
+  document.getElementById('chatMsgs').appendChild(el);
+  document.getElementById('chatMsgs').scrollTop = 99999;
+  return id;
 }
-function addLoading(){
-  const id='ld'+(++lc);
-  const el=document.createElement('div'); el.className='msg ai'; el.id=id;
-  el.innerHTML='<span class="loading-dot">●</span><span class="loading-dot">●</span><span class="loading-dot">●</span>';
-  const msgs=document.getElementById('chatMsgs');
-  msgs.appendChild(el); msgs.scrollTop=msgs.scrollHeight; return id;
-}
-function removeMsg(id){ document.getElementById(id)?.remove(); }
-function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
-function renderAll(){ renderBoard(); renderKho(); renderPlan(); }
+function removeMsg(id) { var el = document.getElementById(id); if(el) el.remove(); }
+function showToast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); }, 2500); }
+function renderAll() { renderBoard(); renderKho(); renderPlan(); }
 
-// ═══════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════
-function init(){
-  document.getElementById('dateChip').textContent=new Date().toLocaleDateString('vi-VN',{weekday:'short',day:'2-digit',month:'2-digit'});
-  const savedKey=LS.loadApi();
-  if(savedKey) document.getElementById('apiInput').value=savedKey;
+// ── INIT ──
+function init() {
+  document.getElementById('dateChip').textContent = new Date().toLocaleDateString('vi-VN', {weekday:'short', day:'2-digit', month:'2-digit'});
+  var savedKey = LS.loadApi();
+  if(savedKey) document.getElementById('apiInput').value = savedKey;
   LS.load(); renderAll();
-  const savedToken=LS.loadToken();
-  if(savedToken){ driveToken=savedToken; setDriveUI(true); driveInit().catch(()=>{ driveToken=null; setDriveUI(false); setSyncTxt('Token hết hạn — đăng nhập lại'); }); }
-  // Fix display for views
-  ['daily','review','kho'].forEach(v=>{ const el=document.getElementById('view-'+v); if(el) el.style.display='none'; });
+  var savedToken = LS.loadToken();
+  if(savedToken) {
+    driveToken = savedToken; setDriveUI(true);
+    driveInit().catch(function(){ driveToken=null; setDriveUI(false); setSyncTxt('Token het han - dang nhap lai'); });
+  }
+  ['daily','review','kho'].forEach(function(v){ var el=document.getElementById('view-'+v); if(el) el.style.display='none'; });
   morningBrief();
 }
 
-window.addEventListener('load',init);
+window.addEventListener('load', init);
 </script>
 </body>
 </html>
