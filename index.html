@@ -804,8 +804,23 @@ function setMode(mode){
 // CHAT HELPERS
 // ═══════════════════════════════════════
 let lc=0;
+function renderMd(text){
+  // Simple markdown renderer for chat
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/### (.*)/g,'<b style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">$1</b>')
+    .replace(/## (.*)/g,'<b style="font-size:13px">$1</b>')
+    .replace(/\*\*(.*?)\*\*/g,'<b>$1</b>')
+    .replace(/- \[ \] (.*)/g,'<span style="display:flex;gap:6px;align-items:baseline"><span style="color:var(--border)">○</span><span>$1</span></span>')
+    .replace(/- \[x\] (.*)/g,'<span style="display:flex;gap:6px;align-items:baseline;opacity:.5;text-decoration:line-through"><span>✓</span><span>$1</span></span>')
+    .replace(/- (.*)/g,'<span style="display:flex;gap:6px"><span style="color:var(--muted)">·</span><span>$1</span></span>')
+    .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--border);margin:6px 0">')
+    .replace(/\n/g,'<br>');
+}
 function addMsg(role,text){
-  const el=document.createElement('div'); el.className='msg '+role; el.textContent=text;
+  const el=document.createElement('div'); el.className='msg '+role;
+  if(role==='ai') el.innerHTML=renderMd(text);
+  else el.textContent=text;
   const msgs=document.getElementById('chatMsgs');
   msgs.appendChild(el); msgs.scrollTop=msgs.scrollHeight; return el;
 }
