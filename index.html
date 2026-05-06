@@ -453,15 +453,16 @@ Anh Luan: chủ Lantern Travel (inbound miền Bắc VN) và Lumi Á Đông Trav
 CÔNG VIỆC HÔM NAY:
 ${S.tasks.map(t=>`[${t.col}|${t.status}] ${t.text}${t.deadline?' deadline:'+t.deadline:''}${t.note?' — '+t.note:''}`).join('\n')||'(chưa có)'}
 
-KẾ HOẠCH NGÀY (thứ tự hiện tại):
-$(S.plan||[]).map((p,i)=>`${i+1}. [${p.timeBlock||'anytime'}|${p.done?'xong':'còn'}] ${p.text}`).join('\n')||'(chưa có)'|${p.done?'xong':'còn'}] ${p.text}`).join('\n')||'(chưa có)'}
+KẾ HOẠCH NGÀY:
+${(S.plan||[]).map((p,i)=>`${i+1}. [${p.timeBlock||'anytime'}|${p.done?'xong':'còn'}] ${p.text}`).join('\n')||'(chưa có)'}
 
 KHO VIỆC:
-${S.kho.filter(t=>t.status==='active').map(t=>`[${t.col}] ${t.text}${t.deadline?' '+t.deadline:''}`).join('\n')||'(rỗng)'}
+${(S.kho||[]).filter(t=>t.status==='active').map(t=>`[${t.col}] ${t.text}${t.deadline?' '+t.deadline:''}`).join('\n')||'(rỗng)'}
 
 SỞ THÍCH SẮP XẾP ĐÃ HỌC:
-${S.preferences.slice(-10).join('\n')||'(chưa có)'}`;
+${(S.preferences||[]).slice(-10).join('\n')||'(chưa có)'}\`;
 }
+
 
 // ═══════════════════════════════════════
 // MORNING BRIEF + DAY PLAN
@@ -805,17 +806,9 @@ function setMode(mode){
 // ═══════════════════════════════════════
 let lc=0;
 function renderMd(text){
-  // Simple markdown renderer for chat
-  return text
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/### (.*)/g,'<b style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">$1</b>')
-    .replace(/## (.*)/g,'<b style="font-size:13px">$1</b>')
-    .replace(/\*\*(.*?)\*\*/g,'<b>$1</b>')
-    .replace(/- \[ \] (.*)/g,'<span style="display:flex;gap:6px;align-items:baseline"><span style="color:var(--border)">○</span><span>$1</span></span>')
-    .replace(/- \[x\] (.*)/g,'<span style="display:flex;gap:6px;align-items:baseline;opacity:.5;text-decoration:line-through"><span>✓</span><span>$1</span></span>')
-    .replace(/- (.*)/g,'<span style="display:flex;gap:6px"><span style="color:var(--muted)">·</span><span>$1</span></span>')
-    .replace(/^---$/gm,'<hr style="border:none;border-top:1px solid var(--border);margin:6px 0">')
-    .replace(/\n/g,'<br>');
+  var s = (text||'').replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  s = s.replace(/\n/g,"<br>");
+  return s;
 }
 function addMsg(role,text){
   const el=document.createElement('div'); el.className='msg '+role;
